@@ -17,10 +17,10 @@
 
 .title {
     font-family: var(--font-display);
-    font-size: clamp(2.5rem, 5vw, 4rem);
-    font-weight: 900;
+    font-size: clamp(2.5rem, 5vw, 4.5rem);
+    font-weight: 700;
     color: #FFFFFF;
-    letter-spacing: 0.05em;
+    letter-spacing: -0.01em;
     margin-bottom: 1.5rem;
 }
 
@@ -62,18 +62,19 @@
 
 .scheduleLabel {
     font-family: var(--font-heading);
-    font-size: 0.85rem;
-    font-weight: 700;
-    color: rgba(255, 255, 255, 0.6);
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: #D4AF37;
+    font-style: italic;
+    letter-spacing: 0.05em;
+    text-transform: none;
     margin-bottom: 0.25rem;
 }
 
 .scheduleValue {
-    font-family: var(--font-heading);
-    font-size: 1.25rem;
-    font-weight: 700;
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    font-weight: 600;
     color: #FFFFFF;
     margin: 0;
 }
@@ -85,11 +86,12 @@
 
 .streamingTitle {
     font-family: var(--font-heading);
-    font-size: 1rem;
-    font-weight: 700;
+    font-size: 1.1rem;
+    font-weight: 500;
     color: rgba(255, 255, 255, 0.6);
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
+    font-style: italic;
+    letter-spacing: 0.05em;
+    text-transform: none;
     margin-bottom: 1.5rem;
 }
 

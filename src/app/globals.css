@@ -5,13 +5,14 @@
    ============================================ */
 
 /* GOOGLE FONTS */
-@import url('https://fonts.googleapis.com/css2?family=Bungee&family=Teko:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700;800&display=swap');
+/* GOOGLE FONTS */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&family=Inter:wght@300;400;500;600;700;800&display=swap');
 
 /* ============================================
    CSS VARIABLES - COLOR SYSTEM
    ============================================ */
 :root {
-  /* PRIMARY COLORS - Vegas Theme */
+  /* ... existing colors ... */
   --color-black: #000000;
   --color-rich-black: #0A0A0A;
   --color-charcoal: #1A1A1A;
@@ -39,8 +40,9 @@
   --gradient-dark: linear-gradient(180deg, #1A1A1A 0%, #000000 100%);
 
   /* TYPOGRAPHY */
-  --font-display: 'Bungee', sans-serif;
-  --font-heading: 'Teko', sans-serif;
+  /* TYPOGRAPHY */
+  --font-display: 'Playfair Display', serif;
+  --font-heading: 'Cormorant Garamond', serif;
   --font-body: 'Inter', sans-serif;
 
   /* SPACING */
@@ -101,10 +103,13 @@ body::before {
   inset: 0;
   pointer-events: none;
   background:
-    radial-gradient(circle at 20% 20%, rgba(220, 38, 38, 0.15) 0%, transparent 50%),
-    radial-gradient(circle at 80% 80%, rgba(255, 215, 0, 0.1) 0%, transparent 50%),
-    radial-gradient(circle at center, rgba(26, 26, 26, 0.8) 0%, var(--color-black) 100%);
+    linear-gradient(to bottom, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0.8) 100%),
+    url('/casino-floor.jpg');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
   z-index: -2;
+  filter: saturate(0.8) brightness(0.6);
 }
 
 /* Poker Chip Pattern Overlay */
@@ -137,36 +142,45 @@ h4,
 h5,
 h6 {
   font-family: var(--font-display);
-  font-weight: 400;
+  font-weight: 600;
   line-height: 1.1;
   color: var(--color-white);
   text-transform: uppercase;
-  letter-spacing: 0.02em;
+  letter-spacing: -0.01em;
 }
 
 h1 {
-  font-size: clamp(2.5rem, 10vw, 6rem);
-  background: linear-gradient(to bottom, #FFFFFF, #FFD700);
+  font-size: clamp(3rem, 10vw, 7.5rem);
+  font-weight: 800;
+  background: linear-gradient(to bottom, #FFFFFF, #D4AF37);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
   text-shadow: none;
+  letter-spacing: -0.02em;
 }
 
 h2 {
-  font-size: clamp(2rem, 6vw, 4rem);
+  font-size: clamp(2rem, 6vw, 4.5rem);
   color: var(--color-vegas-gold);
-  text-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+  font-family: var(--font-heading);
+  font-style: italic;
+  font-weight: 500;
+  text-transform: none;
+  text-shadow: none;
 }
 
 h3 {
-  font-size: clamp(1.5rem, 5vw, 2.5rem);
-  font-family: var(--font-heading);
+  font-size: clamp(1.5rem, 5vw, 2.75rem);
+  font-family: var(--font-display);
+  letter-spacing: 0.02em;
 }
 
 h4 {
   font-size: 1.5rem;
   font-family: var(--font-heading);
+  text-transform: none;
+  font-style: italic;
 }
 
 p {

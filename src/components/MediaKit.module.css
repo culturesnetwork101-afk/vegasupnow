@@ -1,0 +1,439 @@
+.section {
+    padding: 8rem 0;
+    background: linear-gradient(180deg, #000000 0%, #0A0A0A 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+.section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--color-vegas-gold), transparent);
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 5rem;
+}
+
+.title {
+    font-family: var(--font-display);
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    font-weight: 700;
+    color: var(--color-white);
+    margin-bottom: 1rem;
+    letter-spacing: -0.01em;
+    background: linear-gradient(to bottom, #FFFFFF 20%, #D4AF37 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.divider {
+    height: 3px;
+    width: 150px;
+    margin: 0 auto 1.5rem;
+    background: linear-gradient(90deg, transparent, var(--color-hot-red), var(--color-vegas-gold), var(--color-hot-red), transparent);
+}
+
+.subtitle {
+    font-family: var(--font-heading);
+    font-size: 1.25rem;
+    color: var(--color-vegas-gold);
+    font-style: italic;
+    opacity: 0.8;
+}
+
+.contentGrid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    margin-bottom: 4rem;
+    align-items: center;
+}
+
+.missionSection {
+    background: rgba(255, 255, 255, 0.03);
+    padding: 3rem;
+    border-radius: 12px;
+    border: 1px solid rgba(212, 175, 55, 0.1);
+    backdrop-filter: blur(10px);
+}
+
+.sectionHeading {
+    font-family: var(--font-display);
+    font-size: 1.75rem;
+    color: var(--color-vegas-gold);
+    margin-bottom: 1.5rem;
+    letter-spacing: 0.1em;
+}
+
+.description {
+    font-family: var(--font-body);
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 1.5rem;
+}
+
+.statsGrid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+}
+
+.statCard {
+    background: rgba(20, 20, 20, 0.6);
+    padding: 2rem;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.statCard:hover {
+    border-color: var(--color-vegas-gold);
+    background: rgba(212, 175, 55, 0.05);
+    transform: translateY(-5px);
+}
+
+.statIcon {
+    color: var(--color-hot-red);
+    margin-bottom: 1rem;
+    width: 32px;
+    height: 32px;
+}
+
+.statValue {
+    font-family: var(--font-display);
+    font-size: 3rem;
+    font-weight: 800;
+    color: var(--color-white);
+    line-height: 1;
+    margin-bottom: 0.5rem;
+}
+
+.statLabel {
+    font-family: var(--font-heading);
+    font-size: 1.25rem;
+    color: var(--color-vegas-gold);
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+}
+
+.statSub {
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.5);
+    font-style: italic;
+}
+
+.stationDescription {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto 5rem;
+    font-family: var(--font-heading);
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 1.2rem;
+    font-style: italic;
+    line-height: 1.6;
+}
+
+.airingInfo {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-top: 2rem;
+    padding: 1rem;
+    background: rgba(220, 38, 38, 0.1);
+    border-radius: 8px;
+    color: var(--color-white);
+    font-family: var(--font-heading);
+    font-size: 1rem;
+}
+
+.airingInfo svg {
+    color: var(--color-vegas-gold);
+}
+
+.detailsGrid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    margin-bottom: 6rem;
+}
+
+.detailCard {
+    background: rgba(255, 255, 255, 0.02);
+    padding: 2.5rem;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.detailHeader {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.detailIcon {
+    color: var(--color-vegas-gold);
+}
+
+.detailTitle {
+    font-family: var(--font-display);
+    font-size: 1.75rem;
+    color: var(--color-white);
+    letter-spacing: 0.05em;
+}
+
+.list {
+    list-style: none;
+    padding: 0;
+}
+
+.list li {
+    font-family: var(--font-body);
+    font-size: 1.05rem;
+    color: rgba(255, 255, 255, 0.7);
+    margin-bottom: 1.25rem;
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    line-height: 1.4;
+}
+
+.list li svg {
+    color: var(--color-hot-red);
+    margin-top: 0.2rem;
+}
+
+.contactFooter {
+    text-align: center;
+    padding: 4rem 2rem;
+    background: linear-gradient(135deg, rgba(20, 20, 20, 0.8) 0%, rgba(10, 10, 10, 0.9) 100%);
+    border-radius: 20px;
+    border: 2px solid rgba(212, 175, 55, 0.1);
+}
+
+.contactGrid {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.contactName {
+    font-family: var(--font-display);
+    font-size: 2rem;
+    color: var(--color-white);
+}
+
+.contactLink {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    color: var(--color-vegas-gold);
+    font-size: 1.2rem;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.contactLink:hover {
+    color: white;
+    transform: translateY(-2px);
+}
+
+.packagesSection {
+    margin-bottom: 6rem;
+}
+
+.packagesGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 2rem;
+}
+
+.packageCard {
+    background: rgba(255, 255, 255, 0.03);
+    padding: 2.5rem;
+    border-radius: 12px;
+    border: 1px solid rgba(212, 175, 55, 0.1);
+    display: flex;
+    flex-direction: column;
+    transition: all 0.3s ease;
+}
+
+.packageCard:hover {
+    border-color: var(--color-vegas-gold);
+    background: rgba(212, 175, 55, 0.05);
+    transform: translateY(-5px);
+}
+
+.packageTitle {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    color: var(--color-white);
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.packagePrice {
+    font-family: var(--font-display);
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: var(--color-vegas-gold);
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.packagePrice span {
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.5);
+    font-family: var(--font-heading);
+}
+
+.packageList {
+    list-style: none;
+    padding: 0;
+    flex-grow: 1;
+}
+
+.packageList li {
+    font-size: 0.95rem;
+    color: rgba(255, 255, 255, 0.7);
+    margin-bottom: 1rem;
+    position: relative;
+    padding-left: 1.5rem;
+    line-height: 1.4;
+}
+
+.packageList li::before {
+    content: '•';
+    position: absolute;
+    left: 0;
+    color: var(--color-hot-red);
+    font-weight: bold;
+}
+
+.addonsSection {
+    background: rgba(220, 38, 38, 0.05);
+    padding: 4rem;
+    border-radius: 16px;
+    border: 1px solid rgba(220, 38, 38, 0.1);
+    margin-bottom: 6rem;
+}
+
+.addonsGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2rem;
+}
+
+.addonItem {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.addonLabel {
+    font-family: var(--font-heading);
+    font-size: 1.25rem;
+    color: var(--color-white);
+    font-weight: 600;
+}
+
+.addonPrice {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    color: var(--color-vegas-gold);
+    font-weight: 700;
+}
+
+.cta {
+    text-align: center;
+    background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.05), transparent);
+    padding: 4rem 2rem;
+    border-radius: 20px;
+}
+
+.ctaText {
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    color: var(--color-white);
+    font-style: italic;
+    margin-bottom: 2rem;
+}
+
+.contactLinks {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+}
+
+.ctaButton {
+    display: inline-block;
+    padding: 1.25rem 3rem;
+    background: var(--color-vegas-gold);
+    color: #000;
+    text-decoration: none;
+    font-family: var(--font-display);
+    font-size: 1.1rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+}
+
+.ctaButton:hover {
+    background: #FFF;
+    transform: scale(1.05);
+}
+
+.ctaButtonSecondary {
+    display: inline-block;
+    padding: 1.25rem 3rem;
+    background: transparent;
+    color: var(--color-vegas-gold);
+    border: 2px solid var(--color-vegas-gold);
+    text-decoration: none;
+    font-family: var(--font-display);
+    font-size: 1.1rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+}
+
+.ctaButtonSecondary:hover {
+    background: rgba(212, 175, 55, 0.1);
+    transform: scale(1.05);
+}
+
+@media (max-width: 968px) {
+
+    .contentGrid,
+    .detailsGrid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .missionSection {
+        padding: 2rem;
+    }
+}

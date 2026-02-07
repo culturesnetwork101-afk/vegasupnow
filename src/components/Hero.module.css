@@ -38,11 +38,42 @@
     right: 0;
     bottom: 0;
     background:
-        radial-gradient(ellipse at 50% 30%, rgba(220, 38, 38, 0.15) 0%, transparent 50%),
-        radial-gradient(ellipse at 20% 70%, rgba(212, 175, 55, 0.1) 0%, transparent 40%),
-        radial-gradient(ellipse at 80% 70%, rgba(212, 175, 55, 0.1) 0%, transparent 40%),
-        linear-gradient(180deg, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0.85) 100%);
+        radial-gradient(circle at 15% 30%, rgba(220, 38, 38, 0.2) 0%, transparent 40%),
+        radial-gradient(circle at 85% 20%, rgba(212, 175, 55, 0.15) 0%, transparent 40%),
+        radial-gradient(circle at 50% 80%, rgba(220, 38, 38, 0.1) 0%, transparent 50%),
+        linear-gradient(180deg, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.85) 100%);
     z-index: 1;
+}
+
+/* CINEMATIC LIGHT LEAKS */
+.heroContent::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle at center, rgba(212, 175, 55, 0.05) 0%, transparent 30%);
+    animation: lightLeak 12s ease-in-out infinite alternate;
+    pointer-events: none;
+    z-index: -1;
+}
+
+@keyframes lightLeak {
+    0% {
+        transform: translate(-10%, -10%) scale(1);
+        opacity: 0.3;
+    }
+
+    50% {
+        transform: translate(10%, 5%) scale(1.1);
+        opacity: 0.6;
+    }
+
+    100% {
+        transform: translate(-5%, 15%) scale(1);
+        opacity: 0.3;
+    }
 }
 
 /* HERO CONTENT */
@@ -64,26 +95,28 @@
 
 .title {
     font-family: var(--font-display);
-    font-size: clamp(3.5rem, 10vw, 8rem);
-    font-weight: 900;
+    font-size: clamp(4rem, 12vw, 8.5rem);
+    font-weight: 800;
     color: #FFFFFF;
-    letter-spacing: 0.02em;
+    letter-spacing: -0.02em;
     line-height: 0.9;
     margin-bottom: 1rem;
     text-transform: uppercase;
-    text-shadow:
-        0 4px 20px rgba(0, 0, 0, 0.8),
-        0 0 40px rgba(220, 38, 38, 0.3);
+    background: linear-gradient(to bottom, #FFFFFF 30%, #D4AF37 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
 .subtitle {
     font-family: var(--font-heading);
-    font-size: clamp(1.1rem, 2vw, 1.5rem);
+    font-size: clamp(1.2rem, 2.5vw, 1.8rem);
     color: #D4AF37;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    margin-bottom: 1.5rem;
-    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: none;
+    font-style: italic;
+    margin-bottom: 2rem;
+    font-weight: 500;
 }
 
 .scheduleInfo {
@@ -177,19 +210,19 @@
 
 .hostName {
     font-family: var(--font-display);
-    font-size: clamp(2rem, 4vw, 3.5rem);
-    font-weight: 900;
+    font-size: clamp(2.5rem, 5vw, 4.5rem);
+    font-weight: 700;
     color: #FFFFFF;
-    letter-spacing: 0.05em;
+    letter-spacing: -0.01em;
     margin-bottom: 0.5rem;
-    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
 }
 
 .hostHandle {
     font-family: var(--font-heading);
-    font-size: 1rem;
+    font-size: 1.1rem;
     color: #D4AF37;
-    letter-spacing: 0.05em;
+    font-style: italic;
+    letter-spacing: 0.02em;
 }
 
 /* ========================================
@@ -217,10 +250,11 @@
 
 .statNumber {
     font-family: var(--font-display);
-    font-size: clamp(2rem, 4vw, 3rem);
-    font-weight: 900;
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 800;
     color: #D4AF37;
     line-height: 1;
+    letter-spacing: -0.02em;
 }
 
 .statLabel {

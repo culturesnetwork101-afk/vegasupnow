@@ -31,7 +31,7 @@ export default function Contact() {
                     </motion.a>
 
                     <motion.a
-                        href="mailto:BONAFIED@HOT7025FM.COM"
+                        href="mailto:culturesnetwork101@gmail.com"
                         className={styles.contactCard}
                         initial={{ opacity: 0, x: 20 }}
                         whileInView={{ opacity: 1, x: 0 }}
@@ -39,7 +39,7 @@ export default function Contact() {
                     >
                         <Mail size={32} />
                         <span className={styles.contactLabel}>EMAIL</span>
-                        <span className={styles.contactValue}>BONAFIED@HOT7025FM.COM</span>
+                        <span className={styles.contactValue}>culturesnetwork101@gmail.com</span>
                     </motion.a>
                 </div>
             </div>

@@ -110,9 +110,9 @@ export default function ShowInfo() {
                             <Phone size={24} />
                             <span>702-551-5261</span>
                         </a>
-                        <a href="mailto:BONAFIED@HOT7025FM.COM" className={styles.contactCard}>
+                        <a href="mailto:culturesnetwork101@gmail.com" className={styles.contactCard}>
                             <Mail size={24} />
-                            <span>BONAFIED@HOT7025FM.COM</span>
+                            <span>culturesnetwork101@gmail.com</span>
                         </a>
                     </div>
                 </motion.div>

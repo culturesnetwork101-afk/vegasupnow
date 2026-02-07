@@ -55,7 +55,7 @@ export default function Hero() {
                     animate={{ opacity: 1 }}
                     transition={{ duration: 0.8, delay: 0.4 }}
                 >
-                    <span className={styles.hostedBy}>HOSTED BY</span>
+                    <span className={styles.hostedBy}>Hosted By</span>
                     <h2 className={styles.hostName}>BONAFIED100</h2>
                     <p className={styles.hostHandle}>@OFFICIALBONAFIED100</p>
                 </motion.div>

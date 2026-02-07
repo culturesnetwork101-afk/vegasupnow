@@ -43,9 +43,9 @@ export default function Footer() {
                                 <Phone size={18} />
                                 <span>702-551-5261</span>
                             </a>
-                            <a href="mailto:BONAFIED@HOT7025FM.COM" className={styles.contactItem}>
-                                <Mail size={18} />
-                                <span>BONAFIED@HOT7025FM.COM</span>
+                            <a href="mailto:culturesnetwork101@gmail.com" className={styles.contactItem}>
+                                <Mail size={16} />
+                                <span>culturesnetwork101@gmail.com</span>
                             </a>
                         </div>
                     </div>
