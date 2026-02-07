@@ -1,0 +1,327 @@
+/* ========================================
+   HERO SECTION - PROFESSIONAL VEGAS LOUNGE
+   ======================================== */
+
+.hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #000;
+    overflow: hidden;
+    padding: 8rem 2rem 4rem;
+}
+
+/* BLURRED CASINO FLOOR BACKGROUND */
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url('/casino-floor.jpg');
+    /* User will need to add this */
+    background-size: cover;
+    background-position: center;
+    filter: blur(20px) brightness(0.3);
+    transform: scale(1.1);
+    z-index: 0;
+}
+
+/* ATMOSPHERIC OVERLAY */
+.backgroundOverlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background:
+        radial-gradient(ellipse at 50% 30%, rgba(220, 38, 38, 0.15) 0%, transparent 50%),
+        radial-gradient(ellipse at 20% 70%, rgba(212, 175, 55, 0.1) 0%, transparent 40%),
+        radial-gradient(ellipse at 80% 70%, rgba(212, 175, 55, 0.1) 0%, transparent 40%),
+        linear-gradient(180deg, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0.85) 100%);
+    z-index: 1;
+}
+
+/* HERO CONTENT */
+.heroContent {
+    position: relative;
+    z-index: 2;
+    max-width: 1200px;
+    width: 100%;
+    text-align: center;
+}
+
+/* ========================================
+   TYPOGRAPHY - BOLD EDITORIAL STYLE
+   ======================================== */
+
+.titleSection {
+    margin-bottom: 3rem;
+}
+
+.title {
+    font-family: var(--font-display);
+    font-size: clamp(3.5rem, 10vw, 8rem);
+    font-weight: 900;
+    color: #FFFFFF;
+    letter-spacing: 0.02em;
+    line-height: 0.9;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+    text-shadow:
+        0 4px 20px rgba(0, 0, 0, 0.8),
+        0 0 40px rgba(220, 38, 38, 0.3);
+}
+
+.subtitle {
+    font-family: var(--font-heading);
+    font-size: clamp(1.1rem, 2vw, 1.5rem);
+    color: #D4AF37;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+    font-weight: 600;
+}
+
+.scheduleInfo {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    background: rgba(220, 38, 38, 0.15);
+    border: 1px solid rgba(212, 175, 55, 0.3);
+    padding: 0.75rem 1.5rem;
+    border-radius: 4px;
+    font-family: var(--font-heading);
+    font-size: 1rem;
+    color: #FFFFFF;
+    letter-spacing: 0.05em;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* ========================================
+   VIDEO PLAYER - CLEAN & CINEMATIC
+   ======================================== */
+
+.videoContainer {
+    margin: 0 auto 3rem;
+    max-width: 1000px;
+}
+
+.videoWrapper {
+    position: relative;
+    aspect-ratio: 16 / 9;
+    background: #000;
+    border: 2px solid rgba(212, 175, 55, 0.4);
+    border-radius: 4px;
+    overflow: hidden;
+    box-shadow:
+        0 20px 60px rgba(0, 0, 0, 0.6),
+        0 0 40px rgba(212, 175, 55, 0.2),
+        inset 0 0 0 1px rgba(255, 255, 255, 0.05);
+}
+
+.videoPlayer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+.playOverlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.6), rgba(220, 38, 38, 0.3));
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+}
+
+.videoWrapper:hover .playOverlay {
+    opacity: 1;
+}
+
+.playIcon {
+    color: #D4AF37;
+    filter: drop-shadow(0 0 20px rgba(212, 175, 55, 0.8));
+}
+
+/* ========================================
+   HOST INFO - PROFESSIONAL PRESENTATION
+   ======================================== */
+
+.hostInfo {
+    margin-bottom: 3rem;
+}
+
+.hostedBy {
+    display: block;
+    font-family: var(--font-heading);
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.6);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+}
+
+.hostName {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 4vw, 3.5rem);
+    font-weight: 900;
+    color: #FFFFFF;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.5rem;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+}
+
+.hostHandle {
+    font-family: var(--font-heading);
+    font-size: 1rem;
+    color: #D4AF37;
+    letter-spacing: 0.05em;
+}
+
+/* ========================================
+   STATS BAR - EDITORIAL STYLE
+   ======================================== */
+
+.statsBar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 3rem;
+    padding: 2rem;
+    background: rgba(0, 0, 0, 0.4);
+    border-top: 1px solid rgba(212, 175, 55, 0.2);
+    border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+    backdrop-filter: blur(10px);
+}
+
+.stat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.statNumber {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 900;
+    color: #D4AF37;
+    line-height: 1;
+}
+
+.statLabel {
+    font-family: var(--font-heading);
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.7);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    text-align: center;
+}
+
+.statDivider {
+    width: 1px;
+    height: 60px;
+    background: linear-gradient(180deg,
+            transparent 0%,
+            rgba(212, 175, 55, 0.3) 50%,
+            transparent 100%);
+}
+
+/* ========================================
+   RESPONSIVE DESIGN
+   ======================================== */
+
+@media (max-width: 768px) {
+    .hero {
+        padding: 6rem 1.5rem 3rem;
+    }
+
+    .titleSection {
+        margin-bottom: 2rem;
+    }
+
+    .videoContainer {
+        margin-bottom: 2rem;
+    }
+
+    .statsBar {
+        flex-direction: column;
+        gap: 2rem;
+        padding: 1.5rem;
+    }
+
+    .statDivider {
+        width: 60px;
+        height: 1px;
+        background: linear-gradient(90deg,
+                transparent 0%,
+                rgba(212, 175, 55, 0.3) 50%,
+                transparent 100%);
+    }
+
+    .hostInfo {
+        margin-bottom: 2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .scheduleInfo {
+        font-size: 0.9rem;
+        padding: 0.6rem 1.2rem;
+    }
+
+    .statsBar {
+        gap: 1.5rem;
+    }
+}
+
+/* ========================================
+   SUBTLE ANIMATIONS
+   ======================================== */
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Smooth entrance for content */
+.heroContent>* {
+    animation: fadeIn 0.8s ease-out backwards;
+}
+
+.titleSection {
+    animation-delay: 0s;
+}
+
+.videoContainer {
+    animation-delay: 0.2s;
+}
+
+.hostInfo {
+    animation-delay: 0.4s;
+}
+
+.statsBar {
+    animation-delay: 0.6s;
+}

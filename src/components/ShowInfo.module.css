@@ -1,0 +1,238 @@
+.section {
+    padding: 6rem 0;
+    background: linear-gradient(180deg, #000000 0%, #0A0A0A 50%, #000000 100%);
+    position: relative;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 4rem;
+}
+
+.title {
+    font-family: var(--font-display);
+    font-size: clamp(2.5rem, 6vw, 4rem);
+    color: var(--color-vegas-gold);
+    margin-bottom: 1rem;
+    text-shadow: 0 0 30px rgba(255, 215, 0, 0.5);
+}
+
+.divider {
+    height: 3px;
+    width: 200px;
+    margin: 0 auto;
+    background: linear-gradient(90deg, transparent, var(--color-hot-red), var(--color-vegas-gold), var(--color-hot-red), transparent);
+    box-shadow: 0 0 10px rgba(220, 38, 38, 0.5);
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-bottom: 4rem;
+}
+
+.card {
+    background: rgba(26, 26, 26, 0.8);
+    border: 2px solid var(--color-dark-gray);
+    border-radius: var(--border-radius-lg);
+    padding: 2.5rem;
+    text-align: center;
+    transition: var(--transition-normal);
+    position: relative;
+    overflow: hidden;
+}
+
+.card::before {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    border-radius: var(--border-radius-lg);
+    background: var(--gradient-vegas);
+    opacity: 0;
+    transition: var(--transition-normal);
+    z-index: -1;
+}
+
+.card:hover {
+    transform: translateY(-8px);
+    border-color: var(--color-vegas-gold);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+}
+
+.card:hover::before {
+    opacity: 0.2;
+}
+
+.cardIcon {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--gradient-vegas);
+    border-radius: 50%;
+    color: white;
+    box-shadow: 0 0 30px rgba(255, 215, 0, 0.4);
+}
+
+.cardTitle {
+    font-family: var(--font-heading);
+    font-size: 1.75rem;
+    color: var(--color-white);
+    margin-bottom: 1rem;
+    letter-spacing: 0.05em;
+}
+
+.cardText {
+    font-family: var(--font-body);
+    font-size: 1rem;
+    color: var(--color-platinum);
+    line-height: 1.6;
+    margin-bottom: 1rem;
+}
+
+.cardSubtext {
+    font-family: var(--font-body);
+    font-size: 0.875rem;
+    color: var(--color-silver);
+    font-style: italic;
+}
+
+.socialHandle {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    background: rgba(220, 38, 38, 0.2);
+    border: 1px solid var(--color-hot-red);
+    border-radius: var(--border-radius-sm);
+    color: var(--color-hot-red);
+    font-family: var(--font-heading);
+    font-size: 0.875rem;
+    letter-spacing: 0.05em;
+    margin-top: 1rem;
+}
+
+.scheduleSection {
+    margin-bottom: 4rem;
+}
+
+.scheduleCard {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    padding: 3rem;
+    background: linear-gradient(135deg, rgba(220, 38, 38, 0.1), rgba(255, 215, 0, 0.1));
+    border: 3px solid var(--color-vegas-gold);
+    border-radius: var(--border-radius-lg);
+    box-shadow: 0 0 40px rgba(255, 215, 0, 0.3);
+}
+
+.scheduleIcon {
+    color: var(--color-vegas-gold);
+    filter: drop-shadow(0 0 20px rgba(255, 215, 0, 0.6));
+    flex-shrink: 0;
+}
+
+.scheduleContent {
+    flex: 1;
+}
+
+.scheduleTitle {
+    font-family: var(--font-display);
+    font-size: 2rem;
+    color: var(--color-white);
+    margin-bottom: 0.5rem;
+    letter-spacing: 0.05em;
+}
+
+.scheduleTime {
+    font-family: var(--font-heading);
+    font-size: 2.5rem;
+    color: var(--color-vegas-gold);
+    margin-bottom: 0.5rem;
+    font-weight: 700;
+    text-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+}
+
+.scheduleDescription {
+    font-family: var(--font-body);
+    font-size: 1rem;
+    color: var(--color-platinum);
+    line-height: 1.6;
+}
+
+.contactSection {
+    text-align: center;
+}
+
+.contactTitle {
+    font-family: var(--font-display);
+    font-size: 2.5rem;
+    color: var(--color-vegas-gold);
+    margin-bottom: 2rem;
+    text-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+}
+
+.contactGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.contactCard {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    padding: 2rem;
+    background: rgba(26, 26, 26, 0.8);
+    border: 2px solid var(--color-hot-red);
+    border-radius: var(--border-radius);
+    color: var(--color-white);
+    font-family: var(--font-heading);
+    font-size: 1.25rem;
+    letter-spacing: 0.05em;
+    text-decoration: none;
+    transition: var(--transition-normal);
+}
+
+.contactCard:hover {
+    background: var(--gradient-vegas);
+    border-color: var(--color-vegas-gold);
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-glow-gold);
+}
+
+@media (max-width: 768px) {
+    .section {
+        padding: 4rem 0;
+    }
+
+    .grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    .scheduleCard {
+        flex-direction: column;
+        text-align: center;
+        padding: 2rem;
+    }
+
+    .scheduleTime {
+        font-size: 2rem;
+    }
+
+    .contactGrid {
+        grid-template-columns: 1fr;
+    }
+}

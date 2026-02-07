@@ -1,0 +1,218 @@
+.nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    background: rgba(0, 0, 0, 0.95);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 2px solid var(--color-vegas-gold);
+    box-shadow: 0 4px 20px rgba(220, 38, 38, 0.3);
+}
+
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 1rem 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+}
+
+.logoContainer {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    text-decoration: none;
+    transition: var(--transition-normal);
+}
+
+.logoContainer:hover {
+    transform: scale(1.05);
+}
+
+.logoImage {
+    border-radius: 50%;
+    border: 3px solid var(--color-vegas-gold);
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+    object-fit: cover;
+}
+
+.logoText {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.showName {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--color-white);
+    letter-spacing: 0.05em;
+    line-height: 1;
+    background: linear-gradient(to right, var(--color-white), var(--color-vegas-gold));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.station {
+    font-family: var(--font-heading);
+    font-size: 0.875rem;
+    color: var(--color-hot-red);
+    letter-spacing: 0.1em;
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+.radioIcon {
+    animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.5;
+    }
+}
+
+.navLinks {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    flex: 1;
+    justify-content: center;
+}
+
+.navLink {
+    font-family: var(--font-heading);
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: var(--color-platinum);
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    transition: var(--transition-fast);
+    position: relative;
+}
+
+.navLink::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--gradient-vegas);
+    transition: var(--transition-normal);
+}
+
+.navLink:hover {
+    color: var(--color-vegas-gold);
+}
+
+.navLink:hover::after {
+    width: 100%;
+}
+
+.socialLinks {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.socialLink {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--color-charcoal);
+    border: 2px solid var(--color-dark-gray);
+    color: var(--color-platinum);
+    transition: var(--transition-normal);
+}
+
+.socialLink:hover {
+    background: var(--gradient-vegas);
+    border-color: var(--color-vegas-gold);
+    color: var(--color-white);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-glow-gold);
+}
+
+.menuButton {
+    display: none;
+    background: transparent;
+    border: none;
+    color: var(--color-vegas-gold);
+    cursor: pointer;
+    padding: 0.5rem;
+    transition: var(--transition-fast);
+}
+
+.menuButton:hover {
+    color: var(--color-white);
+    transform: scale(1.1);
+}
+
+.mobileMenu {
+    display: none;
+    flex-direction: column;
+    background: rgba(0, 0, 0, 0.98);
+    border-top: 1px solid var(--color-dark-gray);
+    padding: 1rem;
+}
+
+.mobileLink {
+    font-family: var(--font-heading);
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--color-platinum);
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 1rem;
+    border-bottom: 1px solid var(--color-dark-gray);
+    transition: var(--transition-fast);
+}
+
+.mobileLink:hover {
+    color: var(--color-vegas-gold);
+    background: rgba(255, 215, 0, 0.05);
+    padding-left: 1.5rem;
+}
+
+@media (max-width: 768px) {
+
+    .navLinks,
+    .socialLinks {
+        display: none;
+    }
+
+    .menuButton {
+        display: block;
+    }
+
+    .mobileMenu {
+        display: flex;
+    }
+
+    .logoText {
+        display: none;
+    }
+
+    .container {
+        padding: 0.75rem 1rem;
+    }
+}

@@ -1,0 +1,150 @@
+/* SCHEDULE SECTION */
+.section {
+    padding: 6rem 2rem;
+    background: linear-gradient(180deg, #000000 0%, #0A0A0A 100%);
+    position: relative;
+}
+
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 4rem;
+}
+
+.title {
+    font-family: var(--font-display);
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 900;
+    color: #FFFFFF;
+    letter-spacing: 0.05em;
+    margin-bottom: 1.5rem;
+}
+
+.divider {
+    width: 100px;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, #D4AF37, transparent);
+    margin: 0 auto;
+}
+
+/* SCHEDULE CARD */
+.scheduleCard {
+    background: linear-gradient(135deg, #1A1A1A, #0A0A0A);
+    border: 2px solid rgba(212, 175, 55, 0.3);
+    border-radius: 12px;
+    padding: 3rem 2.5rem;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+}
+
+.scheduleContent {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2.5rem;
+    margin-bottom: 3rem;
+    padding-bottom: 3rem;
+    border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+}
+
+.scheduleItem {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.scheduleIcon {
+    color: #D4AF37;
+    flex-shrink: 0;
+}
+
+.scheduleLabel {
+    font-family: var(--font-heading);
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.6);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 0.25rem;
+}
+
+.scheduleValue {
+    font-family: var(--font-heading);
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #FFFFFF;
+    margin: 0;
+}
+
+/* STREAMING INFO */
+.streamingInfo {
+    text-align: center;
+}
+
+.streamingTitle {
+    font-family: var(--font-heading);
+    font-size: 1rem;
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.6);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+}
+
+.platforms {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+}
+
+.platform {
+    font-family: var(--font-heading);
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #D4AF37;
+    text-decoration: none;
+    padding: 0.75rem 2rem;
+    border: 2px solid rgba(212, 175, 55, 0.3);
+    border-radius: 4px;
+    transition: all 0.3s ease;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+}
+
+.platform:hover {
+    background: rgba(212, 175, 55, 0.1);
+    border-color: #D4AF37;
+    transform: translateY(-2px);
+}
+
+@media (max-width: 768px) {
+    .section {
+        padding: 4rem 1.5rem;
+    }
+
+    .scheduleCard {
+        padding: 2rem 1.5rem;
+    }
+
+    .scheduleContent {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .scheduleItem {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .platforms {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .platform {
+        width: 100%;
+    }
+}

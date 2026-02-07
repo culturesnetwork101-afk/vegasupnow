@@ -1,0 +1,155 @@
+.section {
+    padding: 6rem 0;
+    background: #000000;
+    position: relative;
+}
+
+.section::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at center, rgba(220, 38, 38, 0.1), transparent 70%);
+    pointer-events: none;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+    position: relative;
+    z-index: 1;
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 4rem;
+}
+
+.title {
+    font-family: var(--font-display);
+    font-size: clamp(2.5rem, 6vw, 4rem);
+    color: var(--color-vegas-gold);
+    margin-bottom: 1rem;
+    text-shadow: 0 0 30px rgba(255, 215, 0, 0.5);
+}
+
+.subtitle {
+    font-family: var(--font-body);
+    font-size: 1.125rem;
+    color: var(--color-platinum);
+    opacity: 0.8;
+}
+
+.socialGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2rem;
+    margin-bottom: 4rem;
+}
+
+.socialCard {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    padding: 2.5rem 2rem;
+    background: rgba(26, 26, 26, 0.8);
+    border: 2px solid var(--color-dark-gray);
+    border-radius: var(--border-radius-lg);
+    text-decoration: none;
+    transition: var(--transition-normal);
+    cursor: pointer;
+}
+
+.socialCard:hover {
+    border-color: var(--platform-color, var(--color-vegas-gold));
+    box-shadow: 0 0 30px var(--platform-color, rgba(255, 215, 0, 0.4));
+    background: rgba(26, 26, 26, 0.95);
+}
+
+.iconWrapper {
+    width: 80px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 50%;
+    color: var(--platform-color, var(--color-vegas-gold));
+    transition: var(--transition-normal);
+}
+
+.socialCard:hover .iconWrapper {
+    background: var(--platform-color, var(--color-vegas-gold));
+    color: white;
+    box-shadow: 0 0 30px var(--platform-color, rgba(255, 215, 0, 0.6));
+}
+
+.platformName {
+    font-family: var(--font-heading);
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--color-white);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+}
+
+.streamingSection {
+    text-align: center;
+    padding: 3rem;
+    background: linear-gradient(135deg, rgba(220, 38, 38, 0.05), rgba(255, 215, 0, 0.05));
+    border: 2px solid var(--color-dark-gray);
+    border-radius: var(--border-radius-lg);
+}
+
+.streamingTitle {
+    font-family: var(--font-display);
+    font-size: 2rem;
+    color: var(--color-white);
+    margin-bottom: 2rem;
+    letter-spacing: 0.05em;
+}
+
+.streamingGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1.5rem;
+}
+
+.streamingCard {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1.5rem 1rem;
+    background: rgba(0, 0, 0, 0.5);
+    border: 1px solid var(--color-dark-gray);
+    border-radius: var(--border-radius);
+    color: var(--color-vegas-gold);
+    font-family: var(--font-heading);
+    font-size: 0.875rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    transition: var(--transition-fast);
+}
+
+.streamingCard:hover {
+    background: rgba(255, 215, 0, 0.1);
+    border-color: var(--color-vegas-gold);
+    transform: translateY(-2px);
+}
+
+@media (max-width: 768px) {
+    .section {
+        padding: 4rem 0;
+    }
+
+    .socialGrid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+    }
+
+    .streamingGrid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}

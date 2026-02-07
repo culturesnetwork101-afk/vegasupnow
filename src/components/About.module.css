@@ -1,0 +1,124 @@
+/* ABOUT SECTION */
+.section {
+    padding: 6rem 2rem;
+    background: #0A0A0A;
+    position: relative;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 4rem;
+}
+
+.title {
+    font-family: var(--font-display);
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 900;
+    color: #FFFFFF;
+    letter-spacing: 0.05em;
+    margin-bottom: 1.5rem;
+}
+
+.divider {
+    width: 100px;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, #D4AF37, transparent);
+    margin: 0 auto;
+}
+
+/* CARD GRID */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.card {
+    background: linear-gradient(135deg, #1A1A1A, #0A0A0A);
+    border: 1px solid rgba(212, 175, 55, 0.2);
+    border-radius: 8px;
+    padding: 2.5rem 2rem;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-8px);
+    border-color: #D4AF37;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+    background: linear-gradient(135deg, #2A2A2A, #1A1A1A);
+}
+
+.icon {
+    width: 64px;
+    height: 64px;
+    margin: 0 auto 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(212, 175, 55, 0.1);
+    border: 2px solid rgba(212, 175, 55, 0.3);
+    border-radius: 50%;
+    color: #D4AF37;
+    transition: all 0.3s ease;
+}
+
+.card:hover .icon {
+    background: rgba(212, 175, 55, 0.2);
+    border-color: #D4AF37;
+    transform: scale(1.1);
+}
+
+.cardTitle {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    font-weight: 900;
+    color: #FFFFFF;
+    letter-spacing: 0.05em;
+    margin-bottom: 1rem;
+}
+
+.cardText {
+    font-family: var(--font-body);
+    font-size: 1rem;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 1rem;
+}
+
+.cardText strong {
+    color: #D4AF37;
+    font-weight: 700;
+}
+
+.link {
+    display: inline-block;
+    font-family: var(--font-heading);
+    font-size: 1rem;
+    color: #D4AF37;
+    text-decoration: none;
+    letter-spacing: 0.05em;
+    margin-top: 0.5rem;
+    transition: all 0.3s ease;
+}
+
+.link:hover {
+    color: #FFFFFF;
+    transform: translateX(4px);
+}
+
+@media (max-width: 768px) {
+    .section {
+        padding: 4rem 1.5rem;
+    }
+
+    .grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+}
