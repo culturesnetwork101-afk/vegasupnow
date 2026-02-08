@@ -91,36 +91,23 @@ html {
 /* Define global background once */
 /* Define global background once */
 /* Define global background once */
-/* Define global background once */
-.global-vegas-background {
-  position: fixed;
-  inset: 0;
-  width: 100vw;
-  height: 100vh;
-  z-index: -1;
-  pointer-events: none;
-  background-color: #050505;
-  background-image:
-    /* Minimal Overlay to ensure image is VISIBLE */
-    linear-gradient(to bottom, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.6) 100%),
-    /* Local Background - Casino Floor */
-    url('/background.jpg');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  filter: contrast(1.1) brightness(1.0);
-}
-
+/* Define global background simply on body */
 body {
   font-family: var(--font-body);
-  background: transparent !important;
+  /* Direct Background Image - Casino Floor */
+  background:
+    /* Minimal Overlay for text readability */
+    linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.7)),
+    url('/casino-floor.jpg') no-repeat center center fixed;
+  background-size: cover;
+  background-color: #050505;
+  /* Fallback */
   color: var(--color-platinum);
   line-height: 1.6;
   overflow-x: hidden;
   min-height: 100vh;
   position: relative;
   z-index: 0;
-  /* Establish stacking context */
 }
 
 main {
