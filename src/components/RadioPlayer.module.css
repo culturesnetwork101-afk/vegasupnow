@@ -1,0 +1,157 @@
+.playerContainer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100vw;
+    background: rgba(0, 0, 0, 0.95);
+    backdrop-filter: blur(10px);
+    border-top: 1px solid var(--color-vegas-gold);
+    z-index: 9999;
+    padding: 0.8rem 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: transform 0.3s ease;
+}
+
+.controls {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.controlButton {
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: var(--color-platinum);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.controlButton:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: var(--color-vegas-gold);
+    color: var(--color-vegas-gold);
+}
+
+.playButton {
+    width: 50px;
+    height: 50px;
+    background: var(--color-vegas-gold);
+    color: #000;
+    border: none;
+}
+
+.playButton:hover {
+    background: #fff;
+    transform: scale(1.05);
+}
+
+.trackInfo {
+    flex: 1;
+    margin: 0 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.trackTitle {
+    font-family: var(--font-heading);
+    font-size: 0.9rem;
+    color: #fff;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    letter-spacing: 0.05em;
+}
+
+.trackArtist {
+    font-size: 0.75rem;
+    color: var(--color-vegas-gold);
+    opacity: 0.8;
+}
+
+.volumeControl {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--color-platinum);
+}
+
+.volumeInput {
+    width: 80px;
+    accent-color: var(--color-vegas-gold);
+    cursor: pointer;
+}
+
+/* Visualization bars (simple CSS animation for now) */
+.visualizer {
+    display: flex;
+    gap: 2px;
+    height: 20px;
+    align-items: flex-end;
+    margin-right: 1rem;
+}
+
+.bar {
+    width: 3px;
+    background: var(--color-vegas-gold);
+    animation: bounce 0.5s infinite ease-in-out alternate;
+}
+
+.bar:nth-child(2) {
+    animation-delay: 0.1s;
+    height: 15px;
+}
+
+.bar:nth-child(3) {
+    animation-delay: 0.2s;
+    height: 10px;
+}
+
+.bar:nth-child(4) {
+    animation-delay: 0.3s;
+    height: 18px;
+}
+
+.bar:nth-child(5) {
+    animation-delay: 0.1s;
+    height: 12px;
+}
+
+@keyframes bounce {
+    from {
+        transform: scaleY(0.3);
+        opacity: 0.5;
+    }
+
+    to {
+        transform: scaleY(1);
+        opacity: 1;
+    }
+}
+
+@media (max-width: 768px) {
+    .trackArtist {
+        display: none;
+    }
+
+    .volumeControl {
+        display: none;
+    }
+
+    .visualizer {
+        display: none;
+    }
+
+    .playerContainer {
+        padding: 0.5rem 1rem;
+    }
+}
