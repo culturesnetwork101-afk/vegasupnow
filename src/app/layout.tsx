@@ -1,5 +1,8 @@
 import type { Metadata } from "next";
+import { Inter } from "next/font/google";
 import "./globals.css";
+
+const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Vegas Up Now - Hot 702.5 FM | Saturdays 12PM PST",
@@ -14,7 +17,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body className={inter.className}>
+        <div className="globalBackground" />
+        <div className="patternOverlay" />
+        {children}
+      </body>
     </html>
   );
 }

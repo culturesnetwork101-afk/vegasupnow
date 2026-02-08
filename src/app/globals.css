@@ -84,21 +84,20 @@
 
 html {
   scroll-behavior: smooth;
+  background-color: var(--color-black);
 }
 
 body {
   font-family: var(--font-body);
-  background-color: var(--color-black);
+  background: transparent;
   color: var(--color-platinum);
   line-height: 1.6;
   overflow-x: hidden;
   min-height: 100vh;
-  position: relative;
 }
 
 /* Vegas Background Effects */
-body::before {
-  content: '';
+.globalBackground {
   position: fixed;
   inset: 0;
   pointer-events: none;
@@ -108,13 +107,12 @@ body::before {
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
-  z-index: -2;
+  z-index: -1;
   filter: saturate(0.8) brightness(0.6);
 }
 
 /* Poker Chip Pattern Overlay */
-body::after {
-  content: '';
+.patternOverlay {
   position: fixed;
   inset: 0;
   pointer-events: none;
@@ -123,13 +121,13 @@ body::after {
   background-size: 200px;
   background-position: center;
   opacity: 0.03;
-  z-index: -1;
+  z-index: 0;
   filter: grayscale(0.5) brightness(1.2);
 }
 
-body>* {
+main {
   position: relative;
-  z-index: 1;
+  z-index: 10;
 }
 
 /* ============================================
