@@ -92,8 +92,10 @@ html {
   inset: 0;
   width: 100vw;
   height: 100vh;
-  z-index: -10;
+  z-index: -1;
   pointer-events: none;
+  background-color: #050505;
+  /* Fallback color */
   background-image:
     /* Semi-transparent Overlay to ensure text readability */
     linear-gradient(to bottom, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.8) 100%),
@@ -113,6 +115,7 @@ body {
   line-height: 1.6;
   overflow-x: hidden;
   min-height: 100vh;
+  /* Removed position: relative to simplify stacking, if possible, or keep it but manage indices */
   position: relative;
 }
 
