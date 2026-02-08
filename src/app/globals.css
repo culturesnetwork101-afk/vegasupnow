@@ -84,9 +84,10 @@
 
 html {
   scroll-behavior: smooth;
+  background-color: #050505;
+  /* Fallback dark background */
 }
 
-/* Define global background once */
 /* Define global background once */
 .global-vegas-background {
   /* Position fixed relative to viewport */
@@ -94,10 +95,10 @@ html {
   inset: 0;
   width: 100vw;
   height: 100vh;
-  /* Z-index 0 ensures it sits above the HTML canvas but below content */
-  z-index: 0;
+  /* Z-index -1 ensures it stays behind all content */
+  z-index: -1;
   pointer-events: none;
-  background-color: transparent;
+  background-color: #050505;
   background-image:
     /* Semi-transparent Overlay to ensure text readability */
     linear-gradient(to bottom, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.8) 100%),
@@ -117,14 +118,15 @@ body {
   line-height: 1.6;
   overflow-x: hidden;
   min-height: 100vh;
-  /* Ensure body content creates a context if needed, but background is separate */
   position: relative;
-  z-index: 1;
+  z-index: 0;
+  /* Establish stacking context */
 }
 
 main {
   position: relative;
-  z-index: 2;
+  z-index: 1;
+  /* Sit above the background */
 }
 
 /* ============================================
