@@ -1,40 +1,65 @@
 'use client';
-import { motion } from 'framer-motion';
-import { Play, ArrowUpRight } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Play, ArrowUpRight, X } from 'lucide-react';
 import Image from 'next/image';
+import { useState, useEffect } from 'react';
 import styles from './LatestEpisodes.module.css';
 
+interface Episode {
+    id: number;
+    title: string;
+    date: string;
+    image: string;
+    duration: string;
+    videoUrl: string;
+}
+
 export default function LatestEpisodes() {
-    const episodes = [
+    const [activeVideo, setActiveVideo] = useState<string | null>(null);
+
+    const episodes: Episode[] = [
         {
             id: 1,
-            title: 'Ep. 51 - New Year Special',
+            title: 'Ep. 51 - LIVE Experience',
             date: 'Jan 25, 2026',
-            image: 'https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?q=80&w=2070&auto=format&fit=crop',
-            duration: '2:15:30'
+            image: 'https://img.youtube.com/vi/R_0G_1_Q7zE/maxresdefault.jpg',
+            duration: '2:15:30',
+            videoUrl: 'https://www.youtube.com/embed/R_0G_1_Q7zE'
         },
         {
             id: 2,
             title: 'Ep. 50 - Year in Review',
             date: 'Dec 30, 2025',
-            image: 'https://images.unsplash.com/photo-1470225620780-dba8ba36b745?q=80&w=2070&auto=format&fit=crop',
-            duration: '2:05:15'
+            image: 'https://img.youtube.com/vi/f6qWd-p709U/maxresdefault.jpg',
+            duration: '2:05:15',
+            videoUrl: 'https://www.youtube.com/embed/f6qWd-p709U'
         },
         {
             id: 3,
-            title: 'Ep. 49 - Holiday Vibes',
+            title: 'Ep. 49 - Urban Frequency',
             date: 'Dec 23, 2025',
-            image: 'https://images.unsplash.com/photo-1514525253344-f85671742981?q=80&w=2070&auto=format&fit=crop',
-            duration: '2:10:45'
+            image: 'https://img.youtube.com/vi/Kz6E0qX8W6k/maxresdefault.jpg',
+            duration: '2:10:45',
+            videoUrl: 'https://www.youtube.com/embed/Kz6E0qX8W6k'
         },
         {
             id: 4,
-            title: 'Ep. 48 - Special Guest',
+            title: 'Ep. 48 - Radio Culture',
             date: 'Dec 16, 2025',
-            image: 'https://images.unsplash.com/photo-1516280440614-37939bbacd81?q=80&w=2070&auto=format&fit=crop',
-            duration: '2:20:00'
+            image: 'https://img.youtube.com/vi/D2B_M_iN0_W_j_S_Q/maxresdefault.jpg',
+            duration: '2:20:00',
+            videoUrl: 'https://www.youtube.com/embed/videoseries?list=UU9P_60_D2B_M_iN0_W_j_S_Q&index=3'
         }
     ];
+
+    // Handle body scroll locking
+    useEffect(() => {
+        if (activeVideo) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = 'auto';
+        }
+    }, [activeVideo]);
 
     return (
         <section className={styles.section}>
@@ -60,6 +85,7 @@ export default function LatestEpisodes() {
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true, margin: "-100px" }}
                             transition={{ duration: 1, delay: index * 0.1, ease: [0.16, 1, 0.3, 1] }}
+                            onClick={() => setActiveVideo(episode.videoUrl)}
                         >
                             <div className={styles.imageWrapper}>
                                 <div className={styles.imageContainer}>
@@ -87,6 +113,33 @@ export default function LatestEpisodes() {
                     ))}
                 </div>
             </div>
+
+            {/* Video Modal */}
+            <AnimatePresence>
+                {activeVideo && (
+                    <motion.div
+                        className={styles.modal}
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        onClick={() => setActiveVideo(null)}
+                    >
+                        <div className={styles.modalContent} onClick={e => e.stopPropagation()}>
+                            <button className={styles.closeButton} onClick={() => setActiveVideo(null)}>
+                                <X size={32} />
+                            </button>
+                            <div className={styles.videoWrapper}>
+                                <iframe
+                                    src={`${activeVideo}${activeVideo.includes('?') ? '&' : '?'}autoplay=1`}
+                                    title="Episode Player"
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                    allowFullScreen
+                                />
+                            </div>
+                        </div>
+                    </motion.div>
+                )}
+            </AnimatePresence>
         </section>
     );
 }

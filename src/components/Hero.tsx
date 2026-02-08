@@ -147,8 +147,8 @@ export default function Hero() {
                         >
                             <iframe
                                 className={styles.theaterPlayer}
-                                src="https://www.youtube.com/embed/live_stream?channel=UC9P_60_D2B_M_iN0_W_j_S_Q&autoplay=1"
-                                title="Vegas Up Now Live"
+                                src="https://www.youtube.com/embed/videoseries?list=UU9P_60_D2B_M_iN0_W_j_S_Q&autoplay=1"
+                                title="Vegas Up Now Gallery"
                                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                                 allowFullScreen
                             />
