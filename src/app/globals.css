@@ -97,21 +97,22 @@ body {
   position: relative;
 }
 
-/* Vegas Background Effects - High End Studio Lounge */
+/* Vegas Background Effects - VIP Suite View */
 body::before {
   content: '';
   position: fixed;
   inset: 0;
   pointer-events: none;
   background:
-    linear-gradient(to bottom, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.9) 100%),
-    url('https://images.unsplash.com/photo-1516280440614-37939bbacd81?q=80&w=2070&auto=format&fit=crop');
+    /* Red/Gold Gradient Overlay */
+    linear-gradient(to bottom, rgba(70, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.95) 100%),
+    /* Vegas Strip Night View */
+    url('https://images.unsplash.com/photo-1546412414-8035e1776c9a?q=80&w=2670&auto=format&fit=crop');
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
   z-index: -2;
-  /* Clean moody look without muddy filters */
-  filter: brightness(0.6) contrast(1.1);
+  filter: contrast(1.2) brightness(0.8) saturate(1.2);
 }
 
 /* Pattern Removed for Cleaner Aesthetic */
