@@ -52,7 +52,7 @@ export default function Schedule() {
                     <div className={styles.streamingInfo}>
                         <h4 className={styles.streamingTitle}>STREAM LIVE ON:</h4>
                         <div className={styles.platforms}>
-                            <a href="https://youtube.com/vegasupnow" target="_blank" rel="noopener noreferrer" className={styles.platform}>
+                            <a href="https://www.youtube.com/channel/UC9P_60_D2B_M_iN0_W_j_S_Q" target="_blank" rel="noopener noreferrer" className={styles.platform}>
                                 YouTube
                             </a>
                             <a href="https://facebook.com/BunafiedCulture" target="_blank" rel="noopener noreferrer" className={styles.platform}>

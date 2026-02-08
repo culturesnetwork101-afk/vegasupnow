@@ -46,7 +46,7 @@ export default function LatestEpisodes() {
             id: 4,
             title: 'Ep. 48 - Radio Culture',
             date: 'Dec 16, 2025',
-            image: 'https://img.youtube.com/vi/D2B_M_iN0_W_j_S_Q/maxresdefault.jpg',
+            image: 'https://img.youtube.com/vi/f6qWd-p709U/hqdefault.jpg',
             duration: '2:20:00',
             videoUrl: 'https://www.youtube.com/embed/videoseries?list=UU9P_60_D2B_M_iN0_W_j_S_Q&index=3'
         }
