@@ -1,10 +1,6 @@
 .section {
     padding: 10rem 2rem;
-    background:
-        linear-gradient(to bottom, #050505 0%, rgba(5, 5, 5, 0.8) 20%, rgba(5, 5, 5, 0.8) 80%, #050505 100%),
-        url('/about-bg.png') no-repeat center center;
-    background-size: cover;
-    background-attachment: fixed;
+    background: transparent;
     position: relative;
     border-top: 1px solid rgba(212, 175, 55, 0.1);
 }
