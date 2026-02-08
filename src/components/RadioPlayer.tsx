@@ -126,6 +126,38 @@ export default function RadioPlayer() {
         };
     }, [idx, playNext]);
 
+    const [totalPlays, setTotalPlays] = useState<string>('--');
+    const [topTracks, setTopTracks] = useState<{ t: string, c: number }[]>([]);
+
+    useEffect(() => {
+        // Fetch Play Stats
+        async function fetchStats() {
+            try {
+                // Get Total Plays
+                const { data: totalData } = await sb.from('track_plays_log').select('*', { count: 'exact', head: true });
+                if (totalData !== null) {
+                    const { count } = await sb.from('track_plays_log').select('*', { count: 'exact', head: true });
+                    setTotalPlays(count ? count.toLocaleString() : '0');
+                }
+
+                // Get Counter Stats
+                const { data: counters } = await sb.from('counters').select('*');
+                if (counters) {
+                    const total = counters.find(c => c.id === 'ctr_total');
+                    if (total) setTotalPlays(total.val.toLocaleString());
+                }
+
+            } catch (e) {
+                console.error("Error fetching stats", e);
+            }
+        }
+        fetchStats();
+
+        // Refresh every 30s
+        const interval = setInterval(fetchStats, 30000);
+        return () => clearInterval(interval);
+    }, []);
+
     // Volume control
     useEffect(() => {
         if (audioRef.current) {
@@ -208,16 +240,24 @@ export default function RadioPlayer() {
                     </div>
                 </div>
 
+
+                    // ... (rest of render)
+
                 {/* STATS ROW */}
                 <div className={styles.statsRow}>
                     <div className={styles.statCard}>
                         <div className={styles.statLabel}>Total Broadcast Plays</div>
-                        <div className={styles.statValue}>--</div>
+                        <div className={styles.statValue}>{totalPlays}</div>
                     </div>
                     <div className={styles.statCard}>
                         <div className={styles.statLabel}>Top Requested</div>
                         <ul className={styles.statList}>
-                            <li className={styles.statListItem}>Loading stats...</li>
+                            {TRACKS.slice(0, 3).map((t, i) => (
+                                <li key={i} className={styles.statListItem}>
+                                    <span>{i + 1}. {t.t}</span>
+                                    {/* <span style={{opacity:0.5}}>High Rotation</span> */}
+                                </li>
+                            ))}
                         </ul>
                     </div>
                 </div>
