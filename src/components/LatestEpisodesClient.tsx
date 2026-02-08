@@ -69,6 +69,7 @@ export default function LatestEpisodesClient({ videos = [] }: LatestEpisodesClie
     // Handle body scroll locking and media coordination
     useEffect(() => {
         if (activeVideo) {
+            console.log("Video active: dispatching media:play");
             document.body.style.overflow = 'hidden';
             // Signal radio to pause
             window.dispatchEvent(new CustomEvent('media:play', { detail: { source: 'video' } }));

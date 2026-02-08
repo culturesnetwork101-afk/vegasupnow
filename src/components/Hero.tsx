@@ -17,13 +17,25 @@ export default function Hero() {
     const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
     const scale = useTransform(scrollYProgress, [0, 1], [1, 1.05]);
 
-    // Handle body scroll locking when theater is open
+    // Handle body scroll locking and media coordination
     useEffect(() => {
         if (isVideoActive) {
             document.body.style.overflow = 'hidden';
+            // Signal radio to pause
+            window.dispatchEvent(new CustomEvent('media:play', { detail: { source: 'video' } }));
         } else {
             document.body.style.overflow = 'auto';
         }
+
+        const handleExternalPlay = (e: Event) => {
+            const detail = (e as CustomEvent).detail;
+            if (detail?.source === 'radio') {
+                setIsVideoActive(false);
+            }
+        };
+
+        window.addEventListener('media:play', handleExternalPlay);
+        return () => window.removeEventListener('media:play', handleExternalPlay);
     }, [isVideoActive]);
 
     return (

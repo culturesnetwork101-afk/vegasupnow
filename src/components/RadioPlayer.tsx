@@ -61,19 +61,6 @@ export default function RadioPlayer() {
         }
     };
 
-    // Listen for other media playing
-    useEffect(() => {
-        const handleExternalPlay = (e: Event) => {
-            const detail = (e as CustomEvent).detail;
-            if (detail?.source !== 'radio' && audioRef.current && !audioRef.current.paused) {
-                audioRef.current.pause();
-                setPlaying(false);
-            }
-        };
-
-        window.addEventListener('media:play', handleExternalPlay);
-        return () => window.removeEventListener('media:play', handleExternalPlay);
-    }, []);
 
     // Load track state
     useEffect(() => {
@@ -112,14 +99,40 @@ export default function RadioPlayer() {
             playNext();
         };
 
-        const handlePlay = () => setPlaying(true);
-        const handlePause = () => setPlaying(false);
+        const handlePlay = () => {
+            console.log("Radio started playing");
+            setPlaying(true);
+        };
+        const handlePause = () => {
+            console.log("Radio paused");
+            setPlaying(false);
+        };
+
+        const handleExternalPlay = (e: Event) => {
+            const detail = (e as CustomEvent).detail;
+            console.log("RadioPlayer received media:play from", detail?.source);
+            if (detail?.source !== 'radio') {
+                console.log("Pausing radio due to external media");
+                audio.pause();
+                setPlaying(false);
+                // Also trigger dispatch just in case others are listening
+            }
+        };
+
+        window.addEventListener('media:play', handleExternalPlay);
+        // Backup global pause
+        (window as any).pauseVegasRadio = () => {
+            console.log("Global pause command received");
+            audio.pause();
+            setPlaying(false);
+        };
 
         audio.addEventListener('ended', handleEnded);
         audio.addEventListener('play', handlePlay);
         audio.addEventListener('pause', handlePause);
 
         return () => {
+            window.removeEventListener('media:play', handleExternalPlay);
             audio.removeEventListener('ended', handleEnded);
             audio.removeEventListener('play', handlePlay);
             audio.removeEventListener('pause', handlePause);
@@ -127,33 +140,29 @@ export default function RadioPlayer() {
     }, [idx, playNext]);
 
     const [totalPlays, setTotalPlays] = useState<string>('--');
-    const [topTracks, setTopTracks] = useState<{ t: string, c: number }[]>([]);
+    const [trackCounts, setTrackCounts] = useState<Record<string, number>>({});
 
     useEffect(() => {
-        // Fetch Play Stats
         async function fetchStats() {
             try {
-                // Get Total Plays
-                const { data: totalData } = await sb.from('track_plays_log').select('*', { count: 'exact', head: true });
-                if (totalData !== null) {
-                    const { count } = await sb.from('track_plays_log').select('*', { count: 'exact', head: true });
-                    setTotalPlays(count ? count.toLocaleString() : '0');
-                }
-
-                // Get Counter Stats
                 const { data: counters } = await sb.from('counters').select('*');
                 if (counters) {
-                    const total = counters.find(c => c.id === 'ctr_total');
-                    if (total) setTotalPlays(total.val.toLocaleString());
-                }
+                    const countsMap: Record<string, number> = {};
+                    counters.forEach(c => {
+                        countsMap[c.id] = c.value;
+                    });
+                    setTrackCounts(countsMap);
 
+                    const total = counters.find(c => c.id === 'ctr_total');
+                    if (total) {
+                        setTotalPlays(total.value.toLocaleString());
+                    }
+                }
             } catch (e) {
                 console.error("Error fetching stats", e);
             }
         }
         fetchStats();
-
-        // Refresh every 30s
         const interval = setInterval(fetchStats, 30000);
         return () => clearInterval(interval);
     }, []);
@@ -164,6 +173,12 @@ export default function RadioPlayer() {
             audioRef.current.volume = volume;
         }
     }, [volume]);
+
+    // Top Tracks logic: Map tracks to counts, sort and take top 3
+    const topTracksSorted = [...TRACKS]
+        .map(t => ({ ...t, count: trackCounts[keyFromUrl(t.u)] || 0 }))
+        .sort((a, b) => b.count - a.count)
+        .slice(0, 3);
 
     return (
         <section className={styles.section}>
@@ -221,41 +236,44 @@ export default function RadioPlayer() {
                     <div className={styles.panel}>
                         <h3 className={styles.playlistHeader}>Session Playlist</h3>
                         <div className={styles.playlist}>
-                            {TRACKS.map((t, i) => (
-                                <div
-                                    key={i}
-                                    className={`${styles.trackItem} ${idx === i ? styles.active : ''}`}
-                                    onClick={() => loadTrack(i, true)}
-                                >
-                                    <div className={styles.trackItemHeader}>
-                                        <div>
-                                            <div className={styles.trackName}>{t.t}</div>
-                                            <div className={styles.trackArtist}>{t.a}</div>
+                            {TRACKS.map((t, i) => {
+                                const count = trackCounts[keyFromUrl(t.u)] || 0;
+                                return (
+                                    <div
+                                        key={i}
+                                        className={`${styles.trackItem} ${idx === i ? styles.active : ''}`}
+                                        onClick={() => loadTrack(i, true)}
+                                    >
+                                        <div className={styles.trackItemHeader}>
+                                            <div>
+                                                <div className={styles.trackName}>{t.t}</div>
+                                                <div className={styles.trackArtist}>{t.a}</div>
+                                                <div style={{ fontSize: '0.7rem', opacity: 0.6, marginTop: '2px' }}>Plays: {count.toLocaleString()}</div>
+                                            </div>
+                                            <button className={styles.trackPlayBtn}>
+                                                {idx === i && playing ? 'PLAYING' : 'PLAY'}
+                                            </button>
                                         </div>
                                     </div>
-                                    {idx === i && playing && <div style={{ color: 'var(--color-vegas-gold)', fontSize: '0.8rem' }}>▶ Playing</div>}
-                                </div>
-                            ))}
+                                );
+                            })}
                         </div>
                     </div>
                 </div>
 
-
-                    // ... (rest of render)
-
                 {/* STATS ROW */}
                 <div className={styles.statsRow}>
                     <div className={styles.statCard}>
-                        <div className={styles.statLabel}>Total Broadcast Plays</div>
+                        <div className={styles.statLabel}>TOTAL RADIO PLAYS</div>
                         <div className={styles.statValue}>{totalPlays}</div>
                     </div>
                     <div className={styles.statCard}>
-                        <div className={styles.statLabel}>Top Requested</div>
+                        <div className={styles.statLabel}>TOP REQUESTED</div>
                         <ul className={styles.statList}>
-                            {TRACKS.slice(0, 3).map((t, i) => (
+                            {topTracksSorted.map((t, i) => (
                                 <li key={i} className={styles.statListItem}>
                                     <span>{i + 1}. {t.t}</span>
-                                    {/* <span style={{opacity:0.5}}>High Rotation</span> */}
+                                    <span style={{ opacity: 0.5 }}>{t.count.toLocaleString()}</span>
                                 </li>
                             ))}
                         </ul>
