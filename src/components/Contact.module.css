@@ -1,7 +1,12 @@
-/* CONTACT SECTION */
 .section {
-    padding: 6rem 2rem;
-    background: transparent;
+    padding: 10rem 2rem;
+    background:
+        linear-gradient(to bottom, #050505 0%, rgba(5, 5, 5, 0.85) 20%, rgba(5, 5, 5, 0.85) 80%, #050505 100%),
+        url('/contact-bg.png') no-repeat center center;
+    background-size: cover;
+    background-attachment: fixed;
+    position: relative;
+    border-top: 1px solid rgba(212, 175, 55, 0.1);
 }
 
 .container {

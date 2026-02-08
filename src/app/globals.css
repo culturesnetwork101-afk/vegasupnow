@@ -94,14 +94,13 @@ html {
 /* Define global background simply on body */
 body {
   font-family: var(--font-body);
-  /* Direct Background Image - Casino Floor */
+  /* Direct Background Image - Premium Vegas Lounge */
   background:
-    /* Minimal Overlay for text readability */
-    linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.7)),
-    url('/casino-floor.jpg') no-repeat center center fixed;
+    /* Soft Overlay for text contrast */
+    linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.75)),
+    url('/background.jpg') no-repeat center center fixed;
   background-size: cover;
   background-color: #050505;
-  /* Fallback */
   color: var(--color-platinum);
   line-height: 1.6;
   overflow-x: hidden;

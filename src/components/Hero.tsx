@@ -13,9 +13,9 @@ export default function Hero() {
         offset: ["start start", "end start"]
     });
 
-    const y = useTransform(scrollYProgress, [0, 1], [0, 300]);
+    const y = useTransform(scrollYProgress, [0, 1], [0, 200]);
     const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
-    const scale = useTransform(scrollYProgress, [0, 1], [1, 1.1]);
+    const scale = useTransform(scrollYProgress, [0, 1], [1, 1.05]);
 
     // Handle body scroll locking when theater is open
     useEffect(() => {
@@ -67,7 +67,7 @@ export default function Hero() {
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 1, delay: 0.6 }}
                     >
-                        Luxury in Motion • Airing Weekly on Hot 702.5 FM
+                        Risky Radio • Airing Weekly on Hot 702.5 FM
                     </motion.p>
                 </div>
 
