@@ -1,6 +1,7 @@
 'use client';
 import Navigation from '@/components/Navigation';
 import Hero from '@/components/Hero';
+import RadioPlayer from '@/components/RadioPlayer';
 import LatestEpisodes from '@/components/LatestEpisodes';
 import About from '@/components/About';
 import Schedule from '@/components/Schedule';
@@ -15,6 +16,7 @@ export default function Home() {
     <main>
       <Navigation />
       <Hero />
+      <RadioPlayer />
       <LatestEpisodes />
       <About />
       <Schedule />

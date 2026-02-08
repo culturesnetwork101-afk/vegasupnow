@@ -48,6 +48,9 @@ export default function RadioPlayer() {
     const togglePlay = () => {
         if (!audioRef.current) return;
         if (audioRef.current.paused) {
+            // Signal regular videos to pause
+            window.dispatchEvent(new CustomEvent('media:play', { detail: { source: 'radio' } }));
+
             // If src is empty (first load), set it
             if (!audioRef.current.src) {
                 audioRef.current.src = currentTrack.u;
@@ -57,6 +60,20 @@ export default function RadioPlayer() {
             audioRef.current.pause();
         }
     };
+
+    // Listen for other media playing
+    useEffect(() => {
+        const handleExternalPlay = (e: Event) => {
+            const detail = (e as CustomEvent).detail;
+            if (detail?.source !== 'radio' && audioRef.current && !audioRef.current.paused) {
+                audioRef.current.pause();
+                setPlaying(false);
+            }
+        };
+
+        window.addEventListener('media:play', handleExternalPlay);
+        return () => window.removeEventListener('media:play', handleExternalPlay);
+    }, []);
 
     // Load track state
     useEffect(() => {
@@ -117,38 +134,94 @@ export default function RadioPlayer() {
     }, [volume]);
 
     return (
-        <div className={styles.playerContainer}>
-            {/* Visualizer (CSS Animation based on play state) */}
-            <div className={styles.visualizer} style={{ opacity: playing ? 1 : 0.3 }}>
-                <div className={styles.bar} style={{ animationDuration: '0.4s' }} />
-                <div className={styles.bar} style={{ animationDuration: '0.6s' }} />
-                <div className={styles.bar} style={{ animationDuration: '0.5s' }} />
-                <div className={styles.bar} style={{ animationDuration: '0.7s' }} />
-            </div>
+        <section className={styles.section}>
+            <div className={styles.container}>
+                <div className={styles.sectionHeader}>
+                    <h2 className={styles.title}>RISKY RADIO</h2>
+                    <p className={styles.subtitle}>LIVE FROM THE STRIP • HOT 702.5 FM</p>
+                </div>
 
-            <div className={styles.trackInfo}>
-                <div className={styles.trackTitle}>{currentTrack.t}</div>
-                <div className={styles.trackArtist}>{currentTrack.a}</div>
-            </div>
+                <div className={styles.radioGrid}>
+                    {/* MAIN PLAYER PANEL */}
+                    <div className={styles.panel}>
+                        <div className={styles.nowPlaying}>
+                            <span className={styles.nowTitle}>{currentTrack.t}</span>
+                            <span className={styles.nowArtist}>{currentTrack.a}</span>
+                        </div>
 
-            <div className={styles.controls}>
-                <button onClick={playPrev} className={styles.controlButton}>⏮</button>
-                <button onClick={togglePlay} className={`${styles.controlButton} ${styles.playButton}`}>
-                    {playing ? '❚❚' : '▶'}
-                </button>
-                <button onClick={playNext} className={styles.controlButton}>⏭</button>
-            </div>
+                        <div className={styles.visualizerWrap}>
+                            <div className={styles.visualizer} style={{ opacity: playing ? 1 : 0.3, height: '60px', gap: '4px', width: '100%', justifyContent: 'center' }}>
+                                {[...Array(20)].map((_, i) => (
+                                    <div
+                                        key={i}
+                                        className={styles.bar}
+                                        style={{
+                                            animationDuration: `${0.4 + (i % 5) * 0.1}s`,
+                                            height: `${20 + (i * 7) % 80}%`,
+                                            width: '6px'
+                                        }}
+                                    />
+                                ))}
+                            </div>
+                        </div>
 
-            <div className={styles.volumeControl}>
-                <span>🔊</span>
-                <input
-                    type="range"
-                    min="0" max="1" step="0.01"
-                    value={volume}
-                    onChange={(e) => setVolume(parseFloat(e.target.value))}
-                    className={styles.volumeInput}
-                />
+                        <div className={styles.sliderContainer} style={{ marginTop: '2rem' }}>
+                            <span>🔊</span>
+                            <input
+                                type="range"
+                                min="0" max="1" step="0.01"
+                                value={volume}
+                                onChange={(e) => setVolume(parseFloat(e.target.value))}
+                                className={styles.slider}
+                            />
+                        </div>
+
+                        <div className={styles.controls}>
+                            <button onClick={playPrev} className={styles.btn}>⏮ Prev</button>
+                            <button onClick={togglePlay} className={`${styles.btn} ${styles.playBtn}`}>
+                                {playing ? '❚❚ PAUSE' : '▶ PLAY RADIO'}
+                            </button>
+                            <button onClick={playNext} className={styles.btn}>Next ⏭</button>
+                        </div>
+                    </div>
+
+                    {/* PLAYLIST PANEL */}
+                    <div className={styles.panel}>
+                        <h3 className={styles.playlistHeader}>Session Playlist</h3>
+                        <div className={styles.playlist}>
+                            {TRACKS.map((t, i) => (
+                                <div
+                                    key={i}
+                                    className={`${styles.trackItem} ${idx === i ? styles.active : ''}`}
+                                    onClick={() => loadTrack(i, true)}
+                                >
+                                    <div className={styles.trackItemHeader}>
+                                        <div>
+                                            <div className={styles.trackName}>{t.t}</div>
+                                            <div className={styles.trackArtist}>{t.a}</div>
+                                        </div>
+                                    </div>
+                                    {idx === i && playing && <div style={{ color: 'var(--color-vegas-gold)', fontSize: '0.8rem' }}>▶ Playing</div>}
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                </div>
+
+                {/* STATS ROW */}
+                <div className={styles.statsRow}>
+                    <div className={styles.statCard}>
+                        <div className={styles.statLabel}>Total Broadcast Plays</div>
+                        <div className={styles.statValue}>--</div>
+                    </div>
+                    <div className={styles.statCard}>
+                        <div className={styles.statLabel}>Top Requested</div>
+                        <ul className={styles.statList}>
+                            <li className={styles.statListItem}>Loading stats...</li>
+                        </ul>
+                    </div>
+                </div>
             </div>
-        </div>
+        </section>
     );
 }

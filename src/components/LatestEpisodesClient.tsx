@@ -66,13 +66,25 @@ export default function LatestEpisodesClient({ videos = [] }: LatestEpisodesClie
         videoUrl: `https://www.youtube.com/embed/${video.id}`
     })) : fallbackEpisodes;
 
-    // Handle body scroll locking
+    // Handle body scroll locking and media coordination
     useEffect(() => {
         if (activeVideo) {
             document.body.style.overflow = 'hidden';
+            // Signal radio to pause
+            window.dispatchEvent(new CustomEvent('media:play', { detail: { source: 'video' } }));
         } else {
             document.body.style.overflow = 'auto';
         }
+
+        const handleExternalPlay = (e: Event) => {
+            const detail = (e as CustomEvent).detail;
+            if (detail?.source === 'radio') {
+                setActiveVideo(null);
+            }
+        };
+
+        window.addEventListener('media:play', handleExternalPlay);
+        return () => window.removeEventListener('media:play', handleExternalPlay);
     }, [activeVideo]);
 
     return (

@@ -10,8 +10,6 @@ export const metadata: Metadata = {
   keywords: "Vegas Up Now, Hot 702.5 FM, BONAFIED100, Las Vegas radio, hip-hop, R&B, pop music, talk radio, live streaming",
 };
 
-import RadioPlayer from "@/components/RadioPlayer";
-
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -22,7 +20,6 @@ export default function RootLayout({
       <body className={inter.className}>
         <div className="global-vegas-background" />
         {children}
-        <RadioPlayer />
       </body>
     </html>
   );
