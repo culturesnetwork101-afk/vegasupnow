@@ -48,7 +48,7 @@ export default function NewsFeed() {
     }
 
     return (
-        <section className={styles.section}>
+        <section id="news" className={styles.section}>
             <div className={styles.container}>
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}

@@ -43,8 +43,8 @@ export default function Schedule() {
                         <div className={styles.scheduleItem}>
                             <MapPin size={32} className={styles.scheduleIcon} />
                             <div>
-                                <h3 className={styles.scheduleLabel}>STATION</h3>
-                                <p className={styles.scheduleValue}>Hot 702.5 FM</p>
+                                <h3 className={styles.scheduleLabel}>NETWORK</h3>
+                                <p className={styles.scheduleValue}>Global Network</p>
                             </div>
                         </div>
                     </div>
@@ -52,7 +52,7 @@ export default function Schedule() {
                     <div className={styles.streamingInfo}>
                         <h4 className={styles.streamingTitle}>STREAM LIVE ON:</h4>
                         <div className={styles.platforms}>
-                            <a href="https://www.youtube.com/channel/UC9P_60_D2B_M_iN0_W_j_S_Q" target="_blank" rel="noopener noreferrer" className={styles.platform}>
+                            <a href="https://www.youtube.com/@vegasupnow" target="_blank" rel="noopener noreferrer" className={styles.platform}>
                                 YouTube
                             </a>
                             <a href="https://facebook.com/BunafiedCulture" target="_blank" rel="noopener noreferrer" className={styles.platform}>

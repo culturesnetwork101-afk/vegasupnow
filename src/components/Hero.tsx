@@ -1,12 +1,13 @@
 'use client';
 import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
 import { useRef, useState, useEffect } from 'react';
-import { Calendar, Play, Volume2, X } from 'lucide-react';
+import { Calendar, Play, X } from 'lucide-react';
 import styles from './Hero.module.css';
 
 export default function Hero() {
     const containerRef = useRef(null);
     const [isVideoActive, setIsVideoActive] = useState(false);
+    const [isLive, setIsLive] = useState(false);
 
     const { scrollYProgress } = useScroll({
         target: containerRef,
@@ -16,6 +17,22 @@ export default function Hero() {
     const y = useTransform(scrollYProgress, [0, 1], [0, 200]);
     const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
     const scale = useTransform(scrollYProgress, [0, 1], [1, 1.05]);
+
+    // Check live status
+    useEffect(() => {
+        async function checkLive() {
+            try {
+                const res = await fetch('/api/youtube/live');
+                const data = await res.json();
+                setIsLive(data.isLive);
+            } catch (e) {
+                console.warn("Live check failed", e);
+            }
+        }
+        checkLive();
+        const interval = setInterval(checkLive, 60000); // Check every minute
+        return () => clearInterval(interval);
+    }, []);
 
     // Handle body scroll locking and media coordination
     useEffect(() => {
@@ -39,7 +56,7 @@ export default function Hero() {
     }, [isVideoActive]);
 
     return (
-        <section ref={containerRef} className={styles.hero}>
+        <section id="home" ref={containerRef} className={styles.hero}>
             {/* Immersive Background */}
             <motion.div style={{ y, scale }} className={styles.backgroundContainer}>
                 <div className={styles.backgroundOverlay} />
@@ -79,7 +96,7 @@ export default function Hero() {
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 1, delay: 0.6 }}
                     >
-                        Risky Radio • Airing Weekly on Hot 702.5 FM
+                        Vegas Up Now Radio • Airing Weekly on Hot 702.5 FM
                     </motion.p>
                 </div>
 
@@ -90,12 +107,18 @@ export default function Hero() {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 1, delay: 0.8, ease: [0.16, 1, 0.3, 1] }}
                 >
-                    <div className={styles.playerPreview} onClick={() => setIsVideoActive(true)}>
+                    <div className={`${styles.playerPreview} ${isLive ? styles.isLive : ''}`} onClick={() => setIsVideoActive(true)}>
                         <div className={styles.glimmer} />
                         <div className={styles.playButton}>
-                            <Play size={20} fill="currentColor" />
+                            {isLive ? (
+                                <div className={styles.liveIndicator} />
+                            ) : (
+                                <Play size={20} fill="currentColor" />
+                            )}
                         </div>
-                        <span className={styles.playText}>EXPERIENCE LIVE</span>
+                        <span className={styles.playText}>
+                            {isLive ? 'ON AIR' : 'EXPERIENCE LOUNGE'}
+                        </span>
                     </div>
                 </motion.div>
 
@@ -110,11 +133,6 @@ export default function Hero() {
                         <Calendar size={14} />
                         <span>SATURDAYS 12PM PST</span>
                     </div>
-                    <div className={styles.infoDivider} />
-                    <div className={styles.infoItem}>
-                        <Volume2 size={14} />
-                        <span>HOT 702.5 FM</span>
-                    </div>
                 </motion.div>
 
                 {/* Host Spotlight */}
@@ -125,7 +143,7 @@ export default function Hero() {
                     transition={{ delay: 1.4, duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
                 >
                     <span className={styles.hostLabel}>CURATED BY</span>
-                    <span className={styles.hostName}>BONAFIED100</span>
+                    <span className={styles.hostName}>CULTURES NETWORK CONNECTIONS</span>
                     <div className={styles.hostLine} />
                 </motion.div>
             </div>
@@ -159,8 +177,11 @@ export default function Hero() {
                         >
                             <iframe
                                 className={styles.theaterPlayer}
-                                src="https://www.youtube.com/embed/videoseries?list=UU9P_60_D2B_M_iN0_W_j_S_Q&autoplay=1"
-                                title="Vegas Up Now Gallery"
+                                src={isLive
+                                    ? "https://www.youtube.com/embed/live_stream?channel=UC_oVuCQmHJkAKhYOqmMgXmQ&autoplay=1"
+                                    : "https://www.youtube.com/embed/videoseries?list=UU9P_60_D2B_M_iN0_W_j_S_Q&autoplay=1"
+                                }
+                                title="Vegas Up Now Live"
                                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                                 allowFullScreen
                             />

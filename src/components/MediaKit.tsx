@@ -1,6 +1,6 @@
 'use client';
 import { motion } from 'framer-motion';
-import { Users, BarChart, Target, Megaphone, CheckCircle, TrendingUp, Calendar, Mail, Instagram } from 'lucide-react';
+import { Target, Megaphone, CheckCircle, Calendar, Mail, Instagram } from 'lucide-react';
 import styles from './MediaKit.module.css';
 
 export default function MediaKit() {
@@ -16,15 +16,15 @@ export default function MediaKit() {
                 >
                     <h2 className={styles.title}>MEDIA KIT</h2>
                     <div className={styles.divider} />
-                    <p className={styles.subtitle}>Sponsorship Opportunities • Airing Weekly on Hot 702.5 FM Las Vegas</p>
+                    <p className={styles.subtitle}>Sponsorship Opportunities • High-Impact Urban Entertainment Platform</p>
                 </motion.div>
 
                 {/* 1. About the Show */}
-                <div className={styles.contentGrid}>
+                <div className={styles.singleContent}>
                     <motion.div
                         className={styles.missionSection}
-                        initial={{ opacity: 0, x: -30 }}
-                        whileInView={{ opacity: 1, x: 0 }}
+                        initial={{ opacity: 0, y: 30 }}
+                        whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                     >
                         <h3 className={styles.sectionHeading}>ABOUT THE SHOW</h3>
@@ -39,47 +39,6 @@ export default function MediaKit() {
                             <span>Airing 2 hours each week • 12 PM PST on Saturdays</span>
                         </div>
                     </motion.div>
-
-                    {/* 2. Station Reach/Stats */}
-                    <div className={styles.statsGrid}>
-                        <motion.div
-                            className={styles.statCard}
-                            initial={{ opacity: 0, scale: 0.9 }}
-                            whileInView={{ opacity: 1, scale: 1 }}
-                            viewport={{ once: true }}
-                        >
-                            <Users className={styles.statIcon} />
-                            <div className={styles.statValue}>2.5M+</div>
-                            <div className={styles.statLabel}>Documented Monthly Listeners</div>
-                            <div className={styles.statSub}>Across 70+ Counties</div>
-                        </motion.div>
-
-                        <motion.div
-                            className={styles.statCard}
-                            initial={{ opacity: 0, scale: 0.9 }}
-                            whileInView={{ opacity: 1, scale: 1 }}
-                            viewport={{ once: true }}
-                            transition={{ delay: 0.1 }}
-                        >
-                            <TrendingUp className={styles.statIcon} />
-                            <div className={styles.statValue}>2.1M+</div>
-                            <div className={styles.statLabel}>Digital Network Listeners</div>
-                            <div className={styles.statSub}>Broad Reach</div>
-                        </motion.div>
-
-                        <motion.div
-                            className={styles.statCard}
-                            initial={{ opacity: 0, scale: 0.9 }}
-                            whileInView={{ opacity: 1, scale: 1 }}
-                            viewport={{ once: true }}
-                            transition={{ delay: 0.2 }}
-                        >
-                            <BarChart className={styles.statIcon} />
-                            <div className={styles.statValue}>4M+</div>
-                            <div className={styles.statLabel}>Total documented listeners*</div>
-                            <div className={styles.statSub}>Aggregate Reach</div>
-                        </motion.div>
-                    </div>
                 </div>
 
                 <motion.div
@@ -88,7 +47,7 @@ export default function MediaKit() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                 >
-                    <p>Hot 702.5 FM is a digital-first platform built for both on-air and online engagement in underserved and niche communities.</p>
+                    <p>Vegas Up Now is a digital-first platform built for intensive community engagement and cultural impact across on-air and online channels.</p>
                 </motion.div>
 
                 {/* 3. Opportunities & Why Sponsor */}
@@ -139,7 +98,7 @@ export default function MediaKit() {
                     <div className={styles.packagesGrid}>
                         <motion.div className={styles.packageCard} initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}>
                             <h4 className={styles.packageTitle}>On-Air Mentions</h4>
-                            <div className={styles.packagePrice}>$150<span>/mo</span></div>
+                            <div className={styles.packagePrice}>Contact for Pricing</div>
                             <ul className={styles.packageList}>
                                 <li>Your business mentioned on the show</li>
                             </ul>
@@ -147,7 +106,7 @@ export default function MediaKit() {
 
                         <motion.div className={styles.packageCard} initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ delay: 0.1 }}>
                             <h4 className={styles.packageTitle}>On-Air Interview</h4>
-                            <div className={styles.packagePrice}>$300<span>/mo</span></div>
+                            <div className={styles.packagePrice}>Contact for Pricing</div>
                             <ul className={styles.packageList}>
                                 <li>A sponsored interview once per month</li>
                                 <li>On-air mentions</li>
@@ -158,7 +117,7 @@ export default function MediaKit() {
 
                         <motion.div className={styles.packageCard} initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ delay: 0.2 }}>
                             <h4 className={styles.packageTitle}>Silver Package</h4>
-                            <div className={styles.packagePrice}>$400<span>/mo</span></div>
+                            <div className={styles.packagePrice}>Contact for Pricing</div>
                             <ul className={styles.packageList}>
                                 <li>Sponsored interview once per month</li>
                                 <li>Increased on-air mentions</li>
@@ -169,7 +128,7 @@ export default function MediaKit() {
 
                         <motion.div className={styles.packageCard} initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ delay: 0.3 }}>
                             <h4 className={styles.packageTitle}>Gold Package</h4>
-                            <div className={styles.packagePrice}>$650<span>/mo</span></div>
+                            <div className={styles.packagePrice}>Contact for Pricing</div>
                             <ul className={styles.packageList}>
                                 <li>Sponsored interview once per month</li>
                                 <li>Premium on-air mentions</li>
@@ -191,19 +150,19 @@ export default function MediaKit() {
                     <div className={styles.addonsGrid}>
                         <div className={styles.addonItem}>
                             <span className={styles.addonLabel}>Show Sponsorship</span>
-                            <span className={styles.addonPrice}>+$300/mo</span>
+                            <span className={styles.addonPrice}>Contact for Pricing</span>
                         </div>
                         <div className={styles.addonItem}>
                             <span className={styles.addonLabel}>Sponsored Interview</span>
-                            <span className={styles.addonPrice}>+$100/INT</span>
+                            <span className={styles.addonPrice}>Contact for Pricing</span>
                         </div>
                         <div className={styles.addonItem}>
                             <span className={styles.addonLabel}>Social Media Post</span>
-                            <span className={styles.addonPrice}>+$100/POST</span>
+                            <span className={styles.addonPrice}>Contact for Pricing</span>
                         </div>
                         <div className={styles.addonItem}>
                             <span className={styles.addonLabel}>Audio Promo</span>
-                            <span className={styles.addonPrice}>+$75/mo</span>
+                            <span className={styles.addonPrice}>Contact for Pricing</span>
                         </div>
                     </div>
                 </motion.div>

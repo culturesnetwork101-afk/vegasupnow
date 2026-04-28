@@ -14,7 +14,7 @@
 .container {
     max-width: 1600px;
     margin: 0 auto;
-    padding: 1.5rem 4rem;
+    padding: 1rem 2rem;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -57,7 +57,7 @@
 
 .navLinks {
     display: flex;
-    gap: 4rem;
+    gap: 1.5rem;
 }
 
 .navLink {
@@ -107,18 +107,30 @@
 .mobileMenu {
     display: none;
     flex-direction: column;
-    background: rgba(0, 0, 0, 0.95);
+    background: rgba(0, 0, 0, 0.98);
+    backdrop-filter: blur(20px);
     border-top: 1px solid rgba(212, 175, 55, 0.2);
-    padding: 1rem;
+    padding: 2rem 1.5rem;
+    height: calc(100vh - 80px);
+    /* Fill screen below nav */
+    overflow-y: auto;
 }
 
 .mobileLink {
-    font-family: var(--font-heading);
-    font-size: 1.25rem;
+    font-family: var(--font-display);
+    font-size: 1.75rem;
+    font-weight: 700;
     color: #fff;
-    padding: 1rem;
+    padding: 1.25rem 0;
     text-decoration: none;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    border-bottom: 1px solid rgba(212, 175, 55, 0.1);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    transition: color 0.3s ease;
+}
+
+.mobileLink:active {
+    color: var(--color-gold-premium);
 }
 
 .menuButton {
@@ -128,7 +140,13 @@
     color: #fff;
 }
 
-@media (max-width: 1024px) {
+@media (max-width: 1400px) {
+    .navLinks {
+        gap: 1.25rem;
+    }
+}
+
+@media (max-width: 1200px) {
     .container {
         padding: 1rem 2rem;
     }
@@ -144,5 +162,33 @@
 
     .mobileMenu {
         display: flex;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 0.8rem 1.25rem;
+    }
+
+    .logoContainer {
+        gap: 0.6rem;
+    }
+
+    .showName {
+        font-size: 1rem;
+    }
+
+    .station {
+        font-size: 0.6rem;
+    }
+
+    .logoImage {
+        width: 40px;
+        height: 40px;
+    }
+
+    .mobileLink {
+        font-size: 1.4rem;
+        padding: 1rem 0;
     }
 }

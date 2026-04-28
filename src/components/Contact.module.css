@@ -33,8 +33,8 @@
 
 /* CONTACT GRID */
 .contactGrid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    display: flex;
+    justify-content: center;
     gap: 2rem;
 }
 
@@ -84,6 +84,8 @@
     font-weight: 600;
     color: #FFFFFF;
     letter-spacing: 0.01em;
+    word-break: break-all;
+    text-align: center;
 }
 
 @media (max-width: 768px) {
@@ -93,5 +95,23 @@
 
     .contactGrid {
         grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+    .section {
+        padding: 3rem 1.25rem;
+    }
+
+    .title {
+        font-size: 2.2rem;
+    }
+
+    .contactCard {
+        padding: 2rem 1.5rem;
+    }
+
+    .contactValue {
+        font-size: 0.9rem;
     }
 }

@@ -17,7 +17,7 @@
 
 .title {
     font-family: var(--font-display);
-    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    font-size: clamp(2rem, 6vw, 4.5rem);
     font-weight: 700;
     color: var(--color-vegas-gold);
     margin-bottom: 1rem;
@@ -237,5 +237,32 @@
 
     .contactGrid {
         grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+    .title {
+        font-size: 2rem;
+    }
+
+    .cardTitle {
+        font-size: 1.5rem;
+    }
+
+    .scheduleTitle {
+        font-size: 1.6rem;
+    }
+
+    .scheduleTime {
+        font-size: 1.8rem;
+    }
+
+    .contactTitle {
+        font-size: 1.8rem;
+    }
+
+    .contactCard {
+        padding: 1.5rem 1rem;
+        font-size: 1rem;
     }
 }

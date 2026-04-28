@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import { Radio, Mail, Phone } from 'lucide-react';
+import { Radio, Mail } from 'lucide-react';
 import styles from './Footer.module.css';
 
 export default function Footer() {
@@ -21,7 +21,7 @@ export default function Footer() {
                         <h3 className={styles.brandName}>VEGAS UP NOW</h3>
                         <p className={styles.brandTagline}>
                             <Radio size={16} className={styles.radioIcon} />
-                            Hot 702.5 FM • Las Vegas, NV
+                            Weekly Urban Entertainment • Las Vegas, NV
                         </p>
                     </div>
 
@@ -39,10 +39,6 @@ export default function Footer() {
                     <div className={styles.contactSection}>
                         <h4 className={styles.sectionTitle}>Contact</h4>
                         <div className={styles.contactList}>
-                            <a href="tel:702-551-5261" className={styles.contactItem}>
-                                <Phone size={18} />
-                                <span>702-551-5261</span>
-                            </a>
                             <a href="mailto:culturesnetwork101@gmail.com" className={styles.contactItem}>
                                 <Mail size={16} />
                                 <span>culturesnetwork101@gmail.com</span>
@@ -50,6 +46,7 @@ export default function Footer() {
                         </div>
                     </div>
                 </div>
+
 
                 {/* Divider */}
                 <div className={styles.divider}></div>

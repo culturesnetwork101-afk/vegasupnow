@@ -181,11 +181,11 @@ export default function RadioPlayer() {
         .slice(0, 3);
 
     return (
-        <section className={styles.section}>
+        <section id="radio" className={styles.section}>
             <div className={styles.container}>
                 <div className={styles.sectionHeader}>
-                    <h2 className={styles.title}>RISKY RADIO</h2>
-                    <p className={styles.subtitle}>LIVE FROM THE STRIP • HOT 702.5 FM</p>
+                    <h2 className={styles.title}>VEGAS UP NOW RADIO</h2>
+                    <p className={styles.subtitle}>LIVE FROM VEGASUPNOW.COM</p>
                 </div>
 
                 <div className={styles.radioGrid}>

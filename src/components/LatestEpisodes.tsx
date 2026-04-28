@@ -4,7 +4,7 @@ import styles from './LatestEpisodes.module.css';
 
 export default function LatestEpisodesClient() {
     return (
-        <section className={styles.section}>
+        <section id="episodes" className={styles.section}>
             <div className={styles.container}>
                 <motion.div
                     className={styles.header}

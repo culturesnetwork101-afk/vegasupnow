@@ -9,6 +9,8 @@
     align-items: center;
     justify-content: center;
     background: transparent;
+    overflow: hidden;
+    /* Prevent horizontal scroll from background parallax */
 }
 
 /* IMMERSIVE BACKGROUND */
@@ -177,6 +179,51 @@
     font-weight: 600;
 }
 
+/* LIVE STATUS STYLES */
+.playerPreview.isLive {
+    border-color: #ff0000;
+    background: rgba(255, 0, 0, 0.05);
+}
+
+.playerPreview.isLive:hover {
+    border-color: #ff4444;
+    background: rgba(255, 0, 0, 0.1);
+}
+
+.playerPreview.isLive .playText {
+    color: #ff4444;
+    text-shadow: 0 0 10px rgba(255, 0, 0, 0.3);
+}
+
+.liveIndicator {
+    width: 10px;
+    height: 10px;
+    background: #ff0000;
+    border-radius: 50%;
+    position: relative;
+}
+
+.liveIndicator::after {
+    content: '';
+    position: absolute;
+    inset: -4px;
+    border: 1px solid #ff0000;
+    border-radius: 50%;
+    animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+
+    100% {
+        transform: scale(2.5);
+        opacity: 0;
+    }
+}
+
 /* LUXURY INFO BAR */
 .luxuryInfoBar {
     display: flex;
@@ -321,13 +368,27 @@
 }
 
 @media (max-width: 968px) {
+    .hero {
+        min-height: auto;
+        padding: 8rem 0 4rem;
+    }
+
     .heroContent {
         padding: 0 2rem;
     }
 
+    .title {
+        font-size: clamp(3rem, 15vw, 6rem);
+    }
+
+    .playerTrigger {
+        margin: 4rem 0;
+    }
+
     .playerPreview {
         width: 100%;
-        height: 100px;
+        max-width: 320px;
+        height: 70px;
     }
 
     .hostSpotlight,
@@ -337,6 +398,36 @@
 
     .luxuryInfoBar {
         flex-direction: column;
-        gap: 1rem;
+        gap: 1.5rem;
+        margin-top: 3rem;
+    }
+
+    .infoDivider {
+        display: none;
+    }
+
+    .videoTheater {
+        padding: 1rem;
+    }
+
+    .theaterClose {
+        top: 1.5rem;
+        right: 1.5rem;
+        gap: 0.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .heroContent {
+        padding: 0 1.25rem;
+    }
+
+    .title {
+        font-size: 2.4rem;
+    }
+
+    .subtitle {
+        font-size: 0.95rem;
+        padding: 0 0.5rem;
     }
 }

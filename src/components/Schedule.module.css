@@ -150,3 +150,26 @@
         width: 100%;
     }
 }
+
+@media (max-width: 480px) {
+    .section {
+        padding: 3rem 1.25rem;
+    }
+
+    .title {
+        font-size: 2.2rem;
+    }
+
+    .scheduleCard {
+        padding: 1.5rem 1rem;
+    }
+
+    .scheduleValue {
+        font-size: 1.25rem;
+    }
+
+    .platform {
+        padding: 0.75rem 1rem;
+        font-size: 0.9rem;
+    }
+}

@@ -3,7 +3,7 @@ import styles from './SocialFeed.module.css';
 
 export default function SocialFeed() {
     return (
-        <section className={styles.section}>
+        <section id="socials" className={styles.section}>
             <div className={styles.container}>
                 <h2 className={styles.title}>FOLLOW THE SHOW</h2>
                 <div className={styles.divider} />

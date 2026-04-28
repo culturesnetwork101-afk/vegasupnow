@@ -2,7 +2,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { Menu, X, Radio } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 import styles from './Navigation.module.css';
 
 export default function Navigation() {
@@ -21,18 +21,19 @@ export default function Navigation() {
                     />
                     <div className={styles.logoText}>
                         <span className={styles.showName}>VEGAS UP NOW</span>
-                        <span className={styles.station}>
-                            <Radio size={12} className={styles.radioIcon} />
-                            HOT 702.5 FM
-                        </span>
                     </div>
                 </Link>
 
                 {/* Desktop Navigation */}
                 <div className={styles.navLinks}>
-                    <Link href="/" className={styles.navLink}>Home</Link>
+                    <Link href="#home" className={styles.navLink}>Home</Link>
+                    <Link href="#radio" className={styles.navLink}>Radio</Link>
+                    <Link href="#episodes" className={styles.navLink}>Episodes</Link>
                     <Link href="#about" className={styles.navLink}>About</Link>
                     <Link href="#schedule" className={styles.navLink}>Schedule</Link>
+                    <Link href="#socials" className={styles.navLink}>Socials</Link>
+                    <Link href="#media-kit" className={styles.navLink}>Media Kit</Link>
+                    <Link href="#news" className={styles.navLink}>News</Link>
                     <Link href="#contact" className={styles.navLink}>Contact</Link>
                 </div>
 
@@ -86,14 +87,29 @@ export default function Navigation() {
             {/* Mobile Menu */}
             {isMenuOpen && (
                 <div className={styles.mobileMenu}>
-                    <Link href="/" className={styles.mobileLink} onClick={() => setIsMenuOpen(false)}>
+                    <Link href="#home" className={styles.mobileLink} onClick={() => setIsMenuOpen(false)}>
                         Home
+                    </Link>
+                    <Link href="#radio" className={styles.mobileLink} onClick={() => setIsMenuOpen(false)}>
+                        Radio
+                    </Link>
+                    <Link href="#episodes" className={styles.mobileLink} onClick={() => setIsMenuOpen(false)}>
+                        Episodes
                     </Link>
                     <Link href="#about" className={styles.mobileLink} onClick={() => setIsMenuOpen(false)}>
                         About
                     </Link>
                     <Link href="#schedule" className={styles.mobileLink} onClick={() => setIsMenuOpen(false)}>
                         Schedule
+                    </Link>
+                    <Link href="#socials" className={styles.mobileLink} onClick={() => setIsMenuOpen(false)}>
+                        Socials
+                    </Link>
+                    <Link href="#media-kit" className={styles.mobileLink} onClick={() => setIsMenuOpen(false)}>
+                        Media Kit
+                    </Link>
+                    <Link href="#news" className={styles.mobileLink} onClick={() => setIsMenuOpen(false)}>
+                        News
                     </Link>
                     <Link href="#contact" className={styles.mobileLink} onClick={() => setIsMenuOpen(false)}>
                         Contact
@@ -103,3 +119,4 @@ export default function Navigation() {
         </nav>
     );
 }
+
