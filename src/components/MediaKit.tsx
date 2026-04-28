@@ -182,8 +182,8 @@ export default function MediaKit() {
                         <a href="mailto:culturesnetwork101@gmail.com" className={styles.contactLink}>
                             <Mail size={20} /> culturesnetwork101@gmail.com
                         </a>
-                        <a href="https://instagram.com/culturesnetwork" target="_blank" rel="noopener noreferrer" className={styles.contactLink}>
-                            <Instagram size={20} /> @culturesnetwork
+                        <a href="https://instagram.com/vegasupnowradio" target="_blank" rel="noopener noreferrer" className={styles.contactLink}>
+                            <Instagram size={20} /> @vegasupnowradio
                         </a>
                     </div>
                 </motion.div>

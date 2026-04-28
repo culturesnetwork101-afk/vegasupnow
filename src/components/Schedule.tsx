@@ -58,7 +58,7 @@ export default function Schedule() {
                             <a href="https://facebook.com/BunafiedCulture" target="_blank" rel="noopener noreferrer" className={styles.platform}>
                                 Facebook
                             </a>
-                            <a href="https://instagram.com/officialbonafied100" target="_blank" rel="noopener noreferrer" className={styles.platform}>
+                            <a href="https://instagram.com/vegasupnowradio" target="_blank" rel="noopener noreferrer" className={styles.platform}>
                                 Instagram
                             </a>
                         </div>

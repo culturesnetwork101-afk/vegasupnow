@@ -7,7 +7,7 @@ export default function SocialLinks() {
     const platforms = [
         { name: 'YouTube', icon: Youtube, url: 'https://www.youtube.com/@hot7025fm', color: '#FF0000' },
         { name: 'Facebook', icon: Facebook, url: 'https://www.facebook.com/hot7025fm', color: '#1877F2' },
-        { name: 'Instagram', icon: Instagram, url: 'https://www.instagram.com/officialbonafied100', color: '#E4405F' },
+        { name: 'Instagram', icon: Instagram, url: 'https://www.instagram.com/vegasupnowradio', color: '#E4405F' },
         { name: 'TikTok', icon: Music2, url: 'https://www.tiktok.com/@hot7025fm', color: '#000000' },
     ];
 

@@ -33,8 +33,8 @@ export default function About() {
                         <p className={styles.cardText}>
                             <strong>BONAFIED100</strong> brings you unfiltered conversations, hot tracks, and real talk every Saturday.
                         </p>
-                        <a href="https://instagram.com/officialbonafied100" target="_blank" rel="noopener noreferrer" className={styles.link}>
-                            @OFFICIALBONAFIED100
+                        <a href="https://instagram.com/vegasupnowradio" target="_blank" rel="noopener noreferrer" className={styles.link}>
+                            @vegasupnowradio
                         </a>
                     </motion.div>
 

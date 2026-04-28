@@ -40,7 +40,7 @@ export default function Navigation() {
                 {/* Social Links */}
                 <div className={styles.socialLinks}>
                     <a
-                        href="https://www.instagram.com/officialbonafied100"
+                        href="https://www.instagram.com/vegasupnowradio"
                         target="_blank"
                         rel="noopener noreferrer"
                         className={styles.socialLink}
