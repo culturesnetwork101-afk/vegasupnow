@@ -3,6 +3,9 @@ import Parser from 'rss-parser';
 
 const parser = new Parser();
 
+// Cache the external RSS fetch for ~10 minutes instead of refetching on every request.
+export const revalidate = 600;
+
 export async function GET() {
     try {
         // Top hip-hop news feeds

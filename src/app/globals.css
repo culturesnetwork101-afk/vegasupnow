@@ -169,6 +169,16 @@ body {
   padding: 0;
 }
 
+/* Smooth in-page anchor scrolling; targets clear the fixed nav.
+   Reduced-motion forces scroll-behavior: auto in the media query below. */
+html {
+  scroll-behavior: smooth;
+}
+
+section[id] {
+  scroll-margin-top: 84px;
+}
+
 body {
   font-family: var(--font-body);
   font-size: var(--text-base);

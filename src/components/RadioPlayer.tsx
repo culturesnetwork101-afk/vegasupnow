@@ -150,7 +150,7 @@ export default function RadioPlayer() {
         };
     }, [idx, playNext]);
 
-    const [totalPlays, setTotalPlays] = useState<string>('--');
+    const [totalPlays, setTotalPlays] = useState<string | null>(null);
     const [trackCounts, setTrackCounts] = useState<Record<string, number>>({});
 
     useEffect(() => {
@@ -248,6 +248,7 @@ export default function RadioPlayer() {
                                 onChange={(e) => setVolume(parseFloat(e.target.value))}
                                 className={styles.slider}
                                 aria-label="Volume"
+                                aria-valuetext={`${Math.round(volume * 100)} percent`}
                             />
                         </div>
 
@@ -310,7 +311,14 @@ export default function RadioPlayer() {
                 <motion.div className={styles.statsRow} {...reveal}>
                     <div className={`${styles.statCard} glass`}>
                         <div className={styles.statLabel}>TOTAL RADIO PLAYS</div>
-                        <div className={styles.statValue}>{totalPlays}</div>
+                        <div className={styles.statValue}>
+                            {totalPlays ?? (
+                                <span
+                                    aria-hidden="true"
+                                    style={{ display: 'inline-block', width: '3ch', height: '0.6em', borderRadius: '4px', background: 'rgba(229, 231, 235, 0.14)', verticalAlign: 'middle' }}
+                                />
+                            )}
+                        </div>
                     </div>
                     <div className={`${styles.statCard} glass`}>
                         <div className={styles.statLabel}>TOP REQUESTED</div>

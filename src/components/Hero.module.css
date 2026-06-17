@@ -502,6 +502,12 @@
     will-change: transform;
 }
 
+/* Pause the ticker on hover/focus so a passing item can be read. */
+.marquee:hover .marqueeTrack,
+.marquee:focus-within .marqueeTrack {
+    animation-play-state: paused;
+}
+
 .marqueeGroup {
     display: flex;
     flex-shrink: 0;

@@ -230,7 +230,7 @@ export default function Hero() {
                                 className={styles.theaterPlayer}
                                 src={isLive
                                     ? "https://www.youtube.com/embed/live_stream?channel=UC_oVuCQmHJkAKhYOqmMgXmQ&autoplay=1"
-                                    : "https://www.youtube.com/embed/videoseries?list=UU9P_60_D2B_M_iN0_W_j_S_Q&autoplay=1"
+                                    : "https://www.youtube.com/embed/videoseries?list=UU_oVuCQmHJkAKhYOqmMgXmQ&autoplay=1"
                                 }
                                 title="Vegas Up Now Live"
                                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"

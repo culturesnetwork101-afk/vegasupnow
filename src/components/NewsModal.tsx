@@ -2,6 +2,7 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, ExternalLink, Calendar, Radio } from 'lucide-react';
 import styles from './NewsModal.module.css';
+import DOMPurify from 'isomorphic-dompurify';
 
 interface NewsItem {
     title: string;
@@ -31,7 +32,7 @@ export default function NewsModal({ item, onClose }: NewsModalProps) {
                     exit={{ opacity: 0, scale: 0.9, y: 20 }}
                     onClick={(e) => e.stopPropagation()}
                 >
-                    <button className={styles.closeButton} onClick={onClose}>
+                    <button className={styles.closeButton} onClick={onClose} aria-label="Close">
                         <X size={24} />
                     </button>
 
@@ -60,7 +61,7 @@ export default function NewsModal({ item, onClose }: NewsModalProps) {
 
                         <div
                             className={styles.articleBody}
-                            dangerouslySetInnerHTML={{ __html: item.content || item.contentSnippet }}
+                            dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(item.content || item.contentSnippet || '') }}
                         />
 
                         <div className={styles.footer}>
