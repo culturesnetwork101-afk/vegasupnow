@@ -5,7 +5,7 @@ import RadioPlayer from '@/components/RadioPlayer';
 import LatestEpisodes from '@/components/LatestEpisodes';
 import About from '@/components/About';
 import Schedule from '@/components/Schedule';
-import SocialFeed from '@/components/SocialFeed';
+import SocialLinks from '@/components/SocialLinks';
 import MediaKit from '@/components/MediaKit';
 import NewsFeed from '@/components/NewsFeed';
 import Contact from '@/components/Contact';
@@ -22,7 +22,7 @@ export default function Home() {
       <RadioPlayer />
       <About />
       <Schedule />
-      <SocialFeed />
+      <SocialLinks />
       <Contact />
       <Marquee tone="red" />
       <MediaKit />

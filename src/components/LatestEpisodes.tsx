@@ -75,6 +75,7 @@ export default function LatestEpisodesClient() {
                             title="Vegas Up Now - Latest Episodes"
                             allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture; web-share"
                             allowFullScreen
+                            loading="lazy"
                             className={styles.mainPlayer}
                         />
                     </div>

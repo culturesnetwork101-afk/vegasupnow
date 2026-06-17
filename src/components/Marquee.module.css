@@ -32,6 +32,12 @@
     will-change: transform;
 }
 
+/* Pause on hover/focus so users can read a passing item. */
+.marquee:hover .track,
+.marquee:focus-within .track {
+    animation-play-state: paused;
+}
+
 .group {
     display: flex;
     flex-shrink: 0;

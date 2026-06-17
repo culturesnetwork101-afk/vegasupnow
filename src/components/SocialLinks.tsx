@@ -2,15 +2,16 @@
 import { motion } from 'framer-motion';
 import { Youtube, Facebook, Instagram, Smartphone, Music2 } from 'lucide-react';
 import styles from './SocialLinks.module.css';
+import { SOCIAL } from '@/lib/social';
 
 const LUXURY_EASE = [0.16, 1, 0.3, 1] as const;
 
 export default function SocialLinks() {
     const platforms = [
-        { name: 'YouTube', icon: Youtube, url: 'https://www.youtube.com/@hot7025fm', color: '#FF0000' },
-        { name: 'Facebook', icon: Facebook, url: 'https://www.facebook.com/hot7025fm', color: '#1877F2' },
-        { name: 'Instagram', icon: Instagram, url: 'https://www.instagram.com/vegasupnowradio', color: '#E4405F' },
-        { name: 'TikTok', icon: Music2, url: 'https://www.tiktok.com/@hot7025fm', color: '#000000' },
+        { name: 'YouTube', icon: Youtube, url: SOCIAL.youtube, color: '#FF0000' },
+        { name: 'Facebook', icon: Facebook, url: SOCIAL.facebook, color: '#1877F2' },
+        { name: 'Instagram', icon: Instagram, url: SOCIAL.instagram, color: '#E4405F' },
+        { name: 'TikTok', icon: Music2, url: SOCIAL.tiktok, color: '#000000' },
     ];
 
     const streamingPlatforms = [
@@ -19,7 +20,7 @@ export default function SocialLinks() {
     ];
 
     return (
-        <section className={styles.section}>
+        <section id="socials" className={styles.section}>
             <div className={styles.container}>
                 <motion.div
                     initial={{ opacity: 0, y: 24 }}

@@ -2,6 +2,7 @@
 import { motion } from 'framer-motion';
 import { Mic, Users } from 'lucide-react';
 import styles from './About.module.css';
+import { SOCIAL } from '@/lib/social';
 
 const reveal = {
     initial: { opacity: 0, y: 24 },
@@ -44,7 +45,7 @@ export default function About() {
                         <p className={styles.cardText}>
                             <strong>BONAFIED100</strong> brings you unfiltered conversations, hot tracks, and real talk every Saturday.
                         </p>
-                        <a href="https://instagram.com/vegasupnowradio" target="_blank" rel="noopener noreferrer" className={styles.link}>
+                        <a href={SOCIAL.instagram} target="_blank" rel="noopener noreferrer" className={styles.link}>
                             @vegasupnowradio
                         </a>
                     </motion.div>

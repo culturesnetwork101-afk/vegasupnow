@@ -5,6 +5,7 @@ import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
 import styles from './Navigation.module.css';
+import { SOCIAL } from '@/lib/social';
 
 const NAV_LINKS = [
     { href: '#home', label: 'Home' },
@@ -70,7 +71,7 @@ export default function Navigation() {
                 {/* Social Links */}
                 <div className={styles.socialLinks}>
                     <a
-                        href="https://www.instagram.com/vegasupnowradio"
+                        href={SOCIAL.instagram}
                         target="_blank"
                         rel="noopener noreferrer"
                         className={styles.socialLink}
@@ -81,7 +82,7 @@ export default function Navigation() {
                         </svg>
                     </a>
                     <a
-                        href="https://www.facebook.com/hot7025fm"
+                        href={SOCIAL.facebook}
                         target="_blank"
                         rel="noopener noreferrer"
                         className={styles.socialLink}
@@ -92,7 +93,7 @@ export default function Navigation() {
                         </svg>
                     </a>
                     <a
-                        href="https://www.tiktok.com/@hot7025fm"
+                        href={SOCIAL.tiktok}
                         target="_blank"
                         rel="noopener noreferrer"
                         className={styles.socialLink}

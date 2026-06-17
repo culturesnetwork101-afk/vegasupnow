@@ -2,6 +2,7 @@
 import { motion } from 'framer-motion';
 import { Calendar, Clock, MapPin, Radio, Youtube, Facebook, Instagram } from 'lucide-react';
 import styles from './Schedule.module.css';
+import { SOCIAL } from '@/lib/social';
 
 const reveal = {
     initial: { opacity: 0, y: 24 },
@@ -77,15 +78,15 @@ export default function Schedule() {
                     <div className={styles.streamingInfo}>
                         <h4 className={styles.streamingTitle}>Stream live on</h4>
                         <div className={styles.platforms}>
-                            <a href="https://www.youtube.com/@vegasupnow" target="_blank" rel="noopener noreferrer" className={styles.platform}>
+                            <a href={SOCIAL.youtube} target="_blank" rel="noopener noreferrer" className={styles.platform}>
                                 <Youtube size={18} className={styles.platformIcon} />
                                 YouTube
                             </a>
-                            <a href="https://facebook.com/BunafiedCulture" target="_blank" rel="noopener noreferrer" className={styles.platform}>
+                            <a href={SOCIAL.facebook} target="_blank" rel="noopener noreferrer" className={styles.platform}>
                                 <Facebook size={18} className={styles.platformIcon} />
                                 Facebook
                             </a>
-                            <a href="https://instagram.com/vegasupnowradio" target="_blank" rel="noopener noreferrer" className={styles.platform}>
+                            <a href={SOCIAL.instagram} target="_blank" rel="noopener noreferrer" className={styles.platform}>
                                 <Instagram size={18} className={styles.platformIcon} />
                                 Instagram
                             </a>

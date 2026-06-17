@@ -239,6 +239,12 @@
 
 .socialLink {
     display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    /* >= ~40px hit area for touch/keyboard targeting, icon stays 20px */
+    min-width: 40px;
+    min-height: 40px;
+    border-radius: var(--border-radius-full);
     color: rgba(229, 231, 235, 0.5);
     transition:
         color 0.3s var(--transition-luxury),
@@ -252,8 +258,11 @@
     filter: drop-shadow(0 0 8px rgba(212, 175, 55, 0.5));
 }
 
+/* Visible keyboard focus ring — gold, matches the rounded hit area. */
 .socialLink:focus-visible {
-    outline: none;
+    outline: 2px solid var(--color-gold-premium);
+    outline-offset: 3px;
+    border-radius: var(--border-radius-full);
     color: var(--color-gold-premium);
 }
 
@@ -309,8 +318,11 @@
     color: var(--color-gold-premium);
 }
 
+/* Visible keyboard focus ring on the hamburger toggle. */
 .menuButton:focus-visible {
-    outline: none;
+    outline: 2px solid var(--color-gold-premium);
+    outline-offset: 3px;
+    border-radius: var(--border-radius-sm);
     color: var(--color-gold-premium);
 }
 

@@ -2,6 +2,7 @@
 import { motion } from 'framer-motion';
 import { Target, Megaphone, CheckCircle, Calendar, Mail, Instagram, Radio, Mic, Award, Plus } from 'lucide-react';
 import styles from './MediaKit.module.css';
+import { SOCIAL } from '@/lib/social';
 
 const reveal = {
     initial: { opacity: 0, y: 24 },
@@ -182,7 +183,7 @@ export default function MediaKit() {
                         <a href="mailto:culturesnetwork101@gmail.com" className={styles.contactLink}>
                             <Mail size={20} aria-hidden="true" /> culturesnetwork101@gmail.com
                         </a>
-                        <a href="https://instagram.com/vegasupnowradio" target="_blank" rel="noopener noreferrer" className={styles.contactLink}>
+                        <a href={SOCIAL.instagram} target="_blank" rel="noopener noreferrer" className={styles.contactLink}>
                             <Instagram size={20} aria-hidden="true" /> @vegasupnowradio
                         </a>
                     </div>
