@@ -76,6 +76,51 @@
     text-shadow: var(--glow-gold-soft);
 }
 
+/* Loading skeletons reserve the dispatch footprint so the section never
+   collapses or shifts when the wire arrives. */
+.skeletonCard {
+    min-height: 230px;
+    border-radius: var(--border-radius-lg);
+    border: 1px solid var(--hairline-white);
+    background:
+        linear-gradient(100deg, rgba(255, 255, 255, 0) 35%, rgba(255, 255, 255, 0.06) 50%, rgba(255, 255, 255, 0) 65%),
+        var(--glass-panel);
+    background-size: 200% 100%, auto;
+    animation: skeletonShimmer 1.6s ease-in-out infinite;
+}
+
+@keyframes skeletonShimmer {
+    0%   { background-position: 150% 0, 0 0; }
+    100% { background-position: -150% 0, 0 0; }
+}
+
+/* Empty / error state: a calm dispatch instead of an empty void when the
+   wire feeds return nothing. */
+.emptyState {
+    text-align: center;
+    padding: var(--spacing-2xl);
+    border: 1px solid var(--hairline-gold);
+    border-radius: var(--border-radius-lg);
+    background: var(--glass-panel);
+    backdrop-filter: blur(18px) saturate(150%);
+    -webkit-backdrop-filter: blur(18px) saturate(150%);
+}
+
+.emptyState p {
+    margin: 0;
+    font-family: var(--font-heading);
+    font-style: italic;
+    font-size: var(--text-lg);
+    color: rgba(229, 231, 235, 0.72);
+    letter-spacing: 0.01em;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .skeletonCard {
+        animation: none !important;
+    }
+}
+
 /* ============================================
    NEWS GRID
    ============================================ */
