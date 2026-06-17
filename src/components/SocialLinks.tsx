@@ -1,6 +1,6 @@
 'use client';
 import { motion } from 'framer-motion';
-import { Youtube, Facebook, Instagram, Smartphone, Music2 } from 'lucide-react';
+import { Youtube, Facebook, Instagram, Music2 } from 'lucide-react';
 import styles from './SocialLinks.module.css';
 import { SOCIAL } from '@/lib/social';
 
@@ -14,9 +14,9 @@ export default function SocialLinks() {
         { name: 'TikTok', icon: Music2, url: SOCIAL.tiktok, color: '#000000' },
     ];
 
-    const streamingPlatforms = [
-        { name: 'Apple Music', icon: Music2, label: 'Apple' },
-        { name: 'Google Play', icon: Smartphone, label: 'Google Play' },
+    const streamingLinks = [
+        { name: 'YouTube Live', icon: Youtube, url: SOCIAL.youtube },
+        { name: 'Facebook Live', icon: Facebook, url: SOCIAL.facebook },
     ];
 
     return (
@@ -73,39 +73,23 @@ export default function SocialLinks() {
                         Stream live on
                     </h3>
                     <div className={styles.streamingGrid}>
-                        {streamingPlatforms.map((platform, index) => (
-                            <motion.div
+                        {streamingLinks.map((platform, index) => (
+                            <motion.a
                                 key={platform.name}
+                                href={platform.url}
+                                target="_blank"
+                                rel="noopener noreferrer"
                                 className={styles.streamingCard}
                                 initial={{ opacity: 0, y: 16 }}
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true }}
                                 transition={{ duration: 0.9, ease: LUXURY_EASE, delay: index * 0.08 }}
+                                whileHover={{ y: -4 }}
                             >
                                 <platform.icon size={24} />
-                                <span>{platform.label}</span>
-                            </motion.div>
+                                <span>{platform.name}</span>
+                            </motion.a>
                         ))}
-                        <motion.div
-                            className={styles.streamingCard}
-                            initial={{ opacity: 0, y: 16 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ duration: 0.9, ease: LUXURY_EASE, delay: 0.16 }}
-                        >
-                            <Youtube size={24} />
-                            <span>YouTube Live</span>
-                        </motion.div>
-                        <motion.div
-                            className={styles.streamingCard}
-                            initial={{ opacity: 0, y: 16 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ duration: 0.9, ease: LUXURY_EASE, delay: 0.24 }}
-                        >
-                            <Facebook size={24} />
-                            <span>Facebook Live</span>
-                        </motion.div>
                     </div>
                 </motion.div>
             </div>
