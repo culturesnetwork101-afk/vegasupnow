@@ -1,7 +1,7 @@
 'use client';
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { ExternalLink, Newspaper } from 'lucide-react';
+import { ExternalLink, Radio } from 'lucide-react';
 import NewsModal from './NewsModal';
 import styles from './NewsFeed.module.css';
 
@@ -14,6 +14,13 @@ interface NewsItem {
     content?: string;
     image?: string;
 }
+
+const reveal = {
+    initial: { opacity: 0, y: 24 },
+    whileInView: { opacity: 1, y: 0 },
+    viewport: { once: true, margin: '-80px' },
+    transition: { duration: 0.9, ease: [0.16, 1, 0.3, 1] as const },
+};
 
 export default function NewsFeed() {
     const [news, setNews] = useState<NewsItem[]>([]);
@@ -41,7 +48,7 @@ export default function NewsFeed() {
         return (
             <section className={styles.section}>
                 <div className={styles.container}>
-                    <div className={styles.loading}>Loading Latest News...</div>
+                    <div className={styles.loading}>Loading latest news</div>
                 </div>
             </section>
         );
@@ -51,12 +58,14 @@ export default function NewsFeed() {
         <section id="news" className={styles.section}>
             <div className={styles.container}>
                 <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
+                    {...reveal}
                     className={styles.header}
                 >
-                    <h2 className={styles.title}>HIP HOP NEWS</h2>
+                    <span className="slate-eyebrow">
+                        <span className="slate-dot" />
+                        From the wire
+                    </span>
+                    <h2 className={styles.title}>Hip hop news</h2>
                     <div className={styles.divider} />
                     <p className={styles.subtitle}>The latest headlines from across the culture</p>
                 </motion.div>
@@ -67,13 +76,13 @@ export default function NewsFeed() {
                             key={index}
                             onClick={() => setSelectedItem(item)}
                             className={styles.card}
-                            initial={{ opacity: 0, y: 20 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ delay: index * 0.05 }}
+                            {...reveal}
+                            transition={{ ...reveal.transition, delay: index * 0.08 }}
                         >
+                            <span className={styles.topAccent} aria-hidden="true" />
                             <div className={styles.sourceBadge}>
-                                <Newspaper size={14} />
+                                <span className={styles.sourceDot} aria-hidden="true" />
+                                <Radio size={13} strokeWidth={1.75} />
                                 <span>{item.source}</span>
                             </div>
                             <h3 className={styles.newsTitle}>{item.title}</h3>
@@ -85,7 +94,10 @@ export default function NewsFeed() {
                                 <span className={styles.date}>
                                     {new Date(item.pubDate).toLocaleDateString()}
                                 </span>
-                                <ExternalLink size={16} />
+                                <span className={styles.readCue}>
+                                    <span className={styles.readLabel}>Read</span>
+                                    <ExternalLink size={16} strokeWidth={1.5} />
+                                </span>
                             </div>
                         </motion.div>
                     ))}

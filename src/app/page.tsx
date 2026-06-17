@@ -10,18 +10,21 @@ import MediaKit from '@/components/MediaKit';
 import NewsFeed from '@/components/NewsFeed';
 import Contact from '@/components/Contact';
 import Footer from '@/components/Footer';
+import Marquee from '@/components/Marquee';
 
 export default function Home() {
   return (
     <main>
       <Navigation />
       <Hero />
-      <RadioPlayer />
       <LatestEpisodes />
+      <Marquee />
+      <RadioPlayer />
       <About />
       <Schedule />
       <SocialFeed />
       <Contact />
+      <Marquee tone="red" />
       <MediaKit />
       <NewsFeed />
       <Footer />

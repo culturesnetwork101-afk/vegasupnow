@@ -1,6 +1,8 @@
 'use client';
 import { useRef, useEffect, useState, useCallback } from 'react';
+import { motion } from 'framer-motion';
 import { createClient } from '@supabase/supabase-js';
+import { SkipBack, SkipForward, Play, Pause, Volume2, Radio } from 'lucide-react';
 import styles from './RadioPlayer.module.css';
 
 // --- CONFIG ---
@@ -16,6 +18,15 @@ const TRACKS = [
     { t: "Get Right (Remix)", a: "I Am Joe Jack", u: "https://storage.googleapis.com/msgsndr/fgqUWBM3YOy5aDcVShG4/media/68cc726deaa0585ef7b3c5b3.mpeg" },
     { t: "Her Man", a: "Hellz Flame", u: "https://storage.googleapis.com/msgsndr/fgqUWBM3YOy5aDcVShG4/media/68cc7240eaa0584c20b3c140.mpeg" }
 ];
+
+// Shared house reveal: slow settle, low amplitude. Matches the site curve.
+const EASE_LUXURY = [0.16, 1, 0.3, 1] as const;
+const reveal = {
+    initial: { opacity: 0, y: 28 },
+    whileInView: { opacity: 1, y: 0 },
+    viewport: { once: true, amount: 0.2 },
+    transition: { duration: 0.9, ease: EASE_LUXURY },
+};
 
 const keyFromUrl = (u: string) => 'ctr_' + btoa(u).replace(/=/g, '');
 const inc = (id: string) => sb.rpc('increment_counter', { id });
@@ -183,102 +194,137 @@ export default function RadioPlayer() {
     return (
         <section id="radio" className={styles.section}>
             <div className={styles.container}>
-                <div className={styles.sectionHeader}>
-                    <h2 className={styles.title}>VEGAS UP NOW RADIO</h2>
-                    <p className={styles.subtitle}>LIVE FROM VEGASUPNOW.COM</p>
-                </div>
+                <motion.div className={styles.sectionHeader} {...reveal}>
+                    <span className={`slate-eyebrow ${playing ? 'slate-eyebrow--live' : ''}`}>
+                        <span className="slate-dot" />
+                        {playing ? 'On air' : 'The sound system'}
+                    </span>
+                    <h2 className={`${styles.title} neon-title`}>Vegas Up Now radio</h2>
+                    <p className={styles.subtitle}>Live from vegasupnow.com</p>
+                </motion.div>
 
                 <div className={styles.radioGrid}>
                     {/* MAIN PLAYER PANEL */}
-                    <div className={styles.panel}>
+                    <motion.div
+                        className={`${styles.panel} ${styles.consolePanel} ${playing ? styles.consolePanelLive : ''} glass`}
+                        {...reveal}
+                    >
+                        {/* ON-AIR LAMP — broadcast-booth tally; gold idle, red lit while live. */}
+                        <div className={`${styles.onAirLamp} ${playing ? styles.onAirLampLive : ''}`} aria-hidden="true">
+                            <span className={styles.onAirTally} />
+                            <span className={styles.onAirText}>{playing ? 'On air' : 'Off air'}</span>
+                        </div>
+
                         <div className={styles.nowPlaying}>
-                            <span className={styles.nowTitle}>{currentTrack.t}</span>
+                            <span className={`${styles.nowLabel} ${playing ? styles.nowLabelLive : ''}`}>
+                                <span className={`${styles.nowDot} ${playing ? styles.nowDotLive : ''}`} />
+                                {playing ? 'NOW PLAYING' : 'UP NEXT'}
+                            </span>
+                            <span className={`${styles.nowTitle} ${playing ? styles.nowTitlePlaying : ''}`}>{currentTrack.t}</span>
                             <span className={styles.nowArtist}>{currentTrack.a}</span>
                         </div>
 
-                        <div className={styles.visualizerWrap}>
-                            <div className={styles.visualizer} style={{ opacity: playing ? 1 : 0.3, height: '60px', gap: '4px', width: '100%', justifyContent: 'center' }}>
+                        <div className={`${styles.visualizerWrap} ${playing ? styles.visualizerLive : ''}`}>
+                            <div className={styles.visualizer} style={{ opacity: playing ? 1 : 0.35 }}>
                                 {[...Array(20)].map((_, i) => (
                                     <div
                                         key={i}
-                                        className={styles.bar}
+                                        className={`${styles.bar} ${playing ? styles.barLive : ''}`}
                                         style={{
                                             animationDuration: `${0.4 + (i % 5) * 0.1}s`,
-                                            height: `${20 + (i * 7) % 80}%`,
-                                            width: '6px'
+                                            height: `${20 + (i * 7) % 80}%`
                                         }}
                                     />
                                 ))}
                             </div>
                         </div>
 
-                        <div className={styles.sliderContainer} style={{ marginTop: '2rem' }}>
-                            <span>🔊</span>
+                        <div className={styles.sliderContainer}>
+                            <Volume2 size={18} className={styles.sliderIcon} />
                             <input
                                 type="range"
                                 min="0" max="1" step="0.01"
                                 value={volume}
                                 onChange={(e) => setVolume(parseFloat(e.target.value))}
                                 className={styles.slider}
+                                aria-label="Volume"
                             />
                         </div>
 
                         <div className={styles.controls}>
-                            <button onClick={playPrev} className={styles.btn}>⏮ Prev</button>
-                            <button onClick={togglePlay} className={`${styles.btn} ${styles.playBtn}`}>
-                                {playing ? '❚❚ PAUSE' : '▶ PLAY RADIO'}
+                            <button onClick={playPrev} className={styles.btn} aria-label="Previous track">
+                                <SkipBack size={18} fill="currentColor" />
+                                <span>Prev</span>
                             </button>
-                            <button onClick={playNext} className={styles.btn}>Next ⏭</button>
+                            <button onClick={togglePlay} className={`${styles.btn} ${styles.playBtn} ${playing ? styles.playBtnLive : ''}`}>
+                                {playing
+                                    ? (<><Pause size={20} fill="currentColor" /><span>Pause</span></>)
+                                    : (<><Play size={20} fill="currentColor" /><span>Play Radio</span></>)}
+                            </button>
+                            <button onClick={playNext} className={styles.btn} aria-label="Next track">
+                                <span>Next</span>
+                                <SkipForward size={18} fill="currentColor" />
+                            </button>
                         </div>
-                    </div>
+                    </motion.div>
 
                     {/* PLAYLIST PANEL */}
-                    <div className={styles.panel}>
-                        <h3 className={styles.playlistHeader}>Session Playlist</h3>
+                    <motion.div
+                        className={`${styles.panel} ${styles.playlistPanel} glass`}
+                        {...reveal}
+                        transition={{ duration: 0.9, ease: EASE_LUXURY, delay: 0.08 }}
+                    >
+                        <h3 className={styles.playlistHeader}>
+                            <Radio size={16} className={styles.playlistHeaderIcon} />
+                            Session playlist
+                        </h3>
                         <div className={styles.playlist}>
                             {TRACKS.map((t, i) => {
                                 const count = trackCounts[keyFromUrl(t.u)] || 0;
+                                const isActive = idx === i;
+                                const isPlayingRow = isActive && playing;
                                 return (
                                     <div
                                         key={i}
-                                        className={`${styles.trackItem} ${idx === i ? styles.active : ''}`}
+                                        className={`${styles.trackItem} ${isActive ? styles.active : ''} ${isPlayingRow ? styles.playingRow : ''}`}
                                         onClick={() => loadTrack(i, true)}
                                     >
                                         <div className={styles.trackItemHeader}>
-                                            <div>
+                                            <div className={styles.trackMeta}>
                                                 <div className={styles.trackName}>{t.t}</div>
                                                 <div className={styles.trackArtist}>{t.a}</div>
-                                                <div style={{ fontSize: '0.7rem', opacity: 0.6, marginTop: '2px' }}>Plays: {count.toLocaleString()}</div>
+                                                <div className={styles.trackPlays}>Plays: {count.toLocaleString()}</div>
                                             </div>
-                                            <button className={styles.trackPlayBtn}>
-                                                {idx === i && playing ? 'PLAYING' : 'PLAY'}
+                                            <button className={`${styles.trackPlayBtn} ${isPlayingRow ? styles.trackPlayBtnLive : ''}`}>
+                                                {isPlayingRow ? 'PLAYING' : 'PLAY'}
                                             </button>
                                         </div>
                                     </div>
                                 );
                             })}
                         </div>
-                    </div>
+                    </motion.div>
                 </div>
 
                 {/* STATS ROW */}
-                <div className={styles.statsRow}>
-                    <div className={styles.statCard}>
+                <motion.div className={styles.statsRow} {...reveal}>
+                    <div className={`${styles.statCard} glass`}>
                         <div className={styles.statLabel}>TOTAL RADIO PLAYS</div>
                         <div className={styles.statValue}>{totalPlays}</div>
                     </div>
-                    <div className={styles.statCard}>
+                    <div className={`${styles.statCard} glass`}>
                         <div className={styles.statLabel}>TOP REQUESTED</div>
                         <ul className={styles.statList}>
                             {topTracksSorted.map((t, i) => (
                                 <li key={i} className={styles.statListItem}>
-                                    <span>{i + 1}. {t.t}</span>
-                                    <span style={{ opacity: 0.5 }}>{t.count.toLocaleString()}</span>
+                                    <span className={styles.statRank}>{i + 1}</span>
+                                    <span className={styles.statTrackName}>{t.t}</span>
+                                    <span className={styles.statCount}>{t.count.toLocaleString()}</span>
                                 </li>
                             ))}
                         </ul>
                     </div>
-                </div>
+                </motion.div>
             </div>
         </section>
     );

@@ -1,150 +1,340 @@
-/* NEWS FEED SECTION */
+/* __LOCAL_KEYFRAMES__ */
+/* Gold hairline sweep that wipes across a dispatch card on hover, like a wire
+   ticker scrolling a fresh headline in. */
+@keyframes wireSweep {
+    0%   { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+}
+
+/* ============================================
+   NEWS FEED SECTION — cinematic newsroom
+   ============================================ */
 .section {
-    padding: 6rem 2rem;
+    padding: var(--space-section) var(--container-pad);
     background: transparent;
     position: relative;
+    border-top: 1px solid var(--hairline-gold);
 }
 
 .container {
-    max-width: 1200px;
+    max-width: var(--container-max);
     margin: 0 auto;
 }
 
+/* EDITORIAL HEADER — eyebrow -> title -> hairline rule -> subtitle, centered */
 .header {
     text-align: center;
-    margin-bottom: 4rem;
+    margin-bottom: var(--spacing-3xl);
 }
+
+/* The shared broadcast-slate kicker (.slate-eyebrow) is used in the markup. It
+   is inline-flex, so it centers as inline content inside this centered header. */
 
 .title {
     font-family: var(--font-display);
-    font-size: clamp(2.5rem, 5vw, 4.5rem);
+    font-size: var(--text-3xl);
     font-weight: 700;
-    color: #FFFFFF;
-    letter-spacing: -0.01em;
-    margin-bottom: 1rem;
+    letter-spacing: var(--tracking-tight);
+    text-transform: uppercase;
+    text-wrap: balance;
+    margin-bottom: var(--spacing-md);
+    /* Gold neon signage, matching the hero wordmark's lit gradient. */
+    background: linear-gradient(135deg, #FDEFAE 6%, #E6C766 32%, #D4AF37 56%, #C8341F 92%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0 0 16px rgba(212, 175, 55, 0.28));
 }
 
 .divider {
-    width: 100px;
-    height: 3px;
-    background: linear-gradient(90deg, transparent, #D4AF37, transparent);
-    margin: 0 auto 1.5rem;
+    width: 96px;
+    height: 1px;
+    background: var(--divider-gold);
+    margin: 0 auto var(--spacing-md);
 }
 
 .subtitle {
     font-family: var(--font-heading);
-    font-size: 1.2rem;
-    color: #D4AF37;
+    font-size: var(--text-lg);
+    color: rgba(229, 231, 235, 0.62);
     font-style: italic;
-    letter-spacing: 0.05em;
+    letter-spacing: 0.01em;
     text-transform: none;
+    margin: 0 auto;
+    max-width: var(--measure-narrow);
 }
 
 .loading {
     text-align: center;
     font-family: var(--font-heading);
-    color: #D4AF37;
-    font-size: 1.5rem;
-    letter-spacing: 0.2em;
-    padding: 4rem 0;
+    color: var(--color-gold-premium);
+    font-size: var(--text-xl);
+    font-style: italic;
+    letter-spacing: 0.16em;
+    padding: var(--spacing-3xl) 0;
+    text-shadow: var(--glow-gold-soft);
 }
 
-/* NEWS GRID */
+/* ============================================
+   NEWS GRID
+   ============================================ */
 .grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 2rem;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: var(--spacing-lg);
 }
 
+/* OBSIDIAN GLASS DISPATCH CARD — a wire bulletin on the shared .glass surface */
 .card {
-    background: linear-gradient(135deg, #1A1A1A, #0A0A0A);
-    border: 1px solid rgba(212, 175, 55, 0.1);
-    border-radius: 4px;
-    padding: 2rem;
+    position: relative;
+    background: var(--glass-panel);
+    backdrop-filter: blur(18px) saturate(150%);
+    -webkit-backdrop-filter: blur(18px) saturate(150%);
+    border: 1px solid var(--hairline-white);
+    border-radius: var(--border-radius-lg);
+    padding: var(--spacing-xl);
     text-decoration: none;
-    transition: all 0.3s ease;
+    cursor: pointer;
+    overflow: hidden;
+    box-shadow: var(--shadow-panel);
+    transition:
+        transform 0.55s var(--transition-luxury),
+        border-color 0.55s var(--transition-luxury),
+        box-shadow 0.55s var(--transition-luxury);
     display: flex;
     flex-direction: column;
 }
 
-.card:hover {
-    transform: translateY(-8px);
-    border-color: #D4AF37;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
-    background: linear-gradient(135deg, #2A2A2A, #1A1A1A);
+/* Faint corner vignette so each dispatch reads like a framed film still. */
+.card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: radial-gradient(ellipse 120% 80% at 50% -10%, rgba(212, 175, 55, 0.06) 0%, transparent 55%);
+    opacity: 0;
+    transition: opacity 0.55s var(--transition-luxury);
+    pointer-events: none;
 }
 
+/* Gold hairline rail across the top edge that lights and sweeps on hover, like a
+   fresh headline scrolling in off the wire. */
+.topAccent {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    overflow: hidden;
+    opacity: 0;
+    background: var(--hairline-gold);
+    transition: opacity 0.55s var(--transition-luxury);
+    pointer-events: none;
+}
+
+.topAccent::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, transparent 0%, var(--color-vegas-gold) 50%, transparent 100%);
+    transform: translateX(-100%);
+}
+
+.card:hover {
+    transform: translateY(-8px);
+    border-color: var(--hairline-gold-strong);
+    box-shadow:
+        var(--shadow-panel),
+        inset 0 0 36px -12px rgba(212, 175, 55, 0.35),
+        0 0 44px -18px rgba(212, 175, 55, 0.4);
+}
+
+.card:hover::before {
+    opacity: 1;
+}
+
+.card:hover .topAccent {
+    opacity: 1;
+}
+
+.card:hover .topAccent::after {
+    animation: wireSweep 1.6s var(--transition-luxury) infinite;
+}
+
+.card:hover .newsTitle {
+    color: var(--color-soft-gold);
+}
+
+.card:hover .readCue {
+    color: var(--color-gold-premium);
+}
+
+.card:hover .readLabel {
+    max-width: 4rem;
+    opacity: 1;
+    margin-right: 0.45rem;
+}
+
+/* SOURCE STAMP — wire dispatch chip with a lit tally dot, echoing the hero
+   ON AIR badge. The gold dot reads as the source's signal light. */
 .sourceBadge {
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
-    background: rgba(212, 175, 55, 0.1);
-    color: #D4AF37;
-    padding: 0.25rem 0.75rem;
-    border-radius: 4px;
-    font-family: var(--font-heading);
-    font-size: 0.75rem;
-    font-weight: 700;
+    background: rgba(212, 175, 55, 0.08);
+    color: var(--color-gold-premium);
+    padding: 0.3rem 0.85rem;
+    border: 1px solid var(--hairline-gold);
+    border-radius: var(--border-radius-full);
+    font-family: var(--font-body);
+    font-size: var(--text-xs);
+    font-weight: 600;
     text-transform: uppercase;
-    letter-spacing: 0.1em;
-    margin-bottom: 1.25rem;
+    letter-spacing: 0.12em;
+    margin-bottom: var(--spacing-md);
     width: fit-content;
+    position: relative;
+    z-index: 1;
+}
+
+.sourceDot {
+    width: 6px;
+    height: 6px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    background: var(--color-vegas-gold);
+    box-shadow: 0 0 8px rgba(212, 175, 55, 0.7);
 }
 
 .newsTitle {
+    position: relative;
+    z-index: 1;
     font-family: var(--font-display);
-    font-size: 1.5rem;
+    font-size: var(--text-xl);
     font-weight: 600;
-    color: #FFFFFF;
-    margin-bottom: 1rem;
+    color: var(--color-white);
+    margin-bottom: var(--spacing-sm);
     line-height: 1.25;
+    text-wrap: balance;
+    transition: color 0.55s var(--transition-luxury);
 }
 
 .snippet {
+    position: relative;
+    z-index: 1;
     font-family: var(--font-body);
-    font-size: 0.95rem;
-    color: rgba(255, 255, 255, 0.7);
-    line-height: 1.5;
-    margin-bottom: 2rem;
+    font-size: var(--text-sm);
+    color: rgba(255, 255, 255, 0.68);
+    line-height: 1.6;
+    margin-bottom: var(--spacing-lg);
     flex-grow: 1;
 }
 
+/* META FOOTER — hairline rule above the dated stamp + read cue */
 .footer {
+    position: relative;
+    z-index: 1;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    color: rgba(255, 255, 255, 0.4);
+    padding-top: var(--spacing-md);
+    border-top: 1px solid var(--hairline-white);
+    color: rgba(255, 255, 255, 0.42);
 }
 
+/* DATE STAMP — a small broadcast timestamp marked by a gold tick. */
 .date {
-    font-size: 0.85rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
     font-family: var(--font-body);
+    font-size: var(--text-xs);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgba(229, 231, 235, 0.55);
+}
+
+.date::before {
+    content: '';
+    width: 5px;
+    height: 5px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    background: var(--color-vegas-gold);
+    box-shadow: 0 0 6px rgba(212, 175, 55, 0.6);
+    opacity: 0.7;
+}
+
+/* READ CUE — label slides open on hover beside the link glyph */
+.readCue {
+    display: inline-flex;
+    align-items: center;
+    color: rgba(255, 255, 255, 0.5);
+    transition: color 0.55s var(--transition-luxury);
+}
+
+.readLabel {
+    display: inline-block;
+    overflow: hidden;
+    max-width: 0;
+    opacity: 0;
+    margin-right: 0;
+    white-space: nowrap;
+    font-family: var(--font-body);
+    font-size: var(--text-xs);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-wide);
+    transition:
+        max-width 0.55s var(--transition-luxury),
+        opacity 0.55s var(--transition-luxury),
+        margin-right 0.55s var(--transition-luxury);
 }
 
 @media (max-width: 768px) {
     .section {
-        padding: 4rem 1.5rem;
+        padding: var(--spacing-2xl) var(--container-pad);
     }
 
     .grid {
         grid-template-columns: 1fr;
+        gap: var(--spacing-md);
     }
 
-    .newsTitle {
-        font-size: 1.25rem;
+    .header {
+        margin-bottom: var(--spacing-2xl);
     }
 }
 
 @media (max-width: 480px) {
     .section {
-        padding: 3rem 1.25rem;
+        padding: var(--spacing-xl) var(--container-pad);
     }
 
     .card {
-        padding: 1.5rem;
+        padding: var(--spacing-lg);
     }
 
-    .title {
-        font-size: 2.2rem;
+    .card::before {
+        left: var(--spacing-lg);
+        right: var(--spacing-lg);
+    }
+}
+
+/* ============================================
+   REDUCED MOTION — hold the wire sweep static and reveal the read label so it
+   never stays clipped to zero width. The slate kicker's own glow is handled by
+   the global reduced-motion block in globals.css.
+   ============================================ */
+@media (prefers-reduced-motion: reduce) {
+    .card:hover .topAccent::after {
+        animation: none !important;
+        transform: none !important;
+    }
+
+    .card:hover .readLabel {
+        max-width: 4rem;
+        opacity: 1;
     }
 }

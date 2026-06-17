@@ -1,143 +1,263 @@
 .section {
-    padding: 10rem 2rem;
+    padding: var(--space-section) var(--container-pad);
     background: transparent;
     position: relative;
-    border-top: 1px solid rgba(212, 175, 55, 0.1);
+    border-top: 1px solid var(--hairline-gold);
+    overflow: hidden;
+    isolation: isolate;
+}
+
+/* Thin film bar along the top edge — echoes the hero's letterbox frame and the
+   broadcast vignette without stealing focus from the editorial content. */
+.letterbox {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 64px;
+    z-index: 0;
+    pointer-events: none;
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0.55) 0%, transparent 100%);
+}
+
+/* Soft gold/red corner wash so the section reads as one lit film frame. */
+.section::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background:
+        radial-gradient(ellipse 60% 50% at 14% 0%, rgba(212, 175, 55, 0.07) 0%, transparent 60%),
+        radial-gradient(ellipse 55% 50% at 88% 8%, rgba(200, 52, 31, 0.06) 0%, transparent 60%);
 }
 
 .container {
-    max-width: 1200px;
+    position: relative;
+    z-index: 1;
+    max-width: var(--container-max);
     margin: 0 auto;
 }
 
+/* EDITORIAL HEADER — broadcast slate kicker -> neon title -> hairline rule, centered.
+   The kicker now uses the shared global .slate-eyebrow (tally dot), so the header
+   opens like the hero's ON AIR slate. */
 .header {
     text-align: center;
-    margin-bottom: 4rem;
+    margin-bottom: var(--spacing-3xl);
 }
 
+/* Local sizing for the heading; gold gradient + glow come from the global
+   .neon-title applied alongside this class in the markup. */
 .title {
     font-family: var(--font-display);
-    font-size: clamp(2.5rem, 5vw, 4.5rem);
+    font-size: var(--text-3xl);
     font-weight: 700;
-    color: #FFFFFF;
-    letter-spacing: -0.01em;
-    margin-bottom: 1.5rem;
+    letter-spacing: var(--tracking-tight);
+    text-transform: uppercase;
+    text-wrap: balance;
+    margin-bottom: var(--spacing-md);
 }
 
+/* Hairline rule echoing the hero's host line — a short lit gold underscore. */
 .divider {
-    width: 100px;
-    height: 3px;
-    background: linear-gradient(90deg, transparent, #D4AF37, transparent);
+    width: 96px;
+    height: 1px;
+    background: var(--divider-gold);
     margin: 0 auto;
+    box-shadow: 0 0 10px rgba(212, 175, 55, 0.35);
 }
 
 /* CARD GRID */
 .grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 2rem;
+    gap: var(--spacing-lg);
 }
 
+/* OBSIDIAN GLASS PANEL — mirrors the shared .glass surface + tokens, lifted with
+   a slow gold scan-sheen on hover that nods to the hero wordmark sheen. */
 .card {
-    background: linear-gradient(135deg, #1A1A1A, #0A0A0A);
-    border: 1px solid rgba(212, 175, 55, 0.2);
-    border-radius: 8px;
-    padding: 2.5rem 2rem;
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+    background: var(--glass-panel);
+    backdrop-filter: blur(18px) saturate(150%);
+    -webkit-backdrop-filter: blur(18px) saturate(150%);
+    border: 1px solid var(--hairline-white);
+    border-radius: var(--border-radius-lg);
+    padding: var(--spacing-3xl) var(--spacing-xl);
     text-align: center;
-    transition: all 0.3s ease;
+    box-shadow: var(--shadow-panel);
+    transition:
+        transform 0.55s var(--transition-luxury),
+        border-color 0.55s var(--transition-luxury),
+        box-shadow 0.55s var(--transition-luxury);
+}
+
+/* Slow diagonal light sheen that sweeps once on hover — the hero's sheen, calmed. */
+.card::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -130%;
+    width: 60%;
+    height: 100%;
+    z-index: 0;
+    pointer-events: none;
+    background: linear-gradient(100deg, transparent 0%, rgba(255, 248, 220, 0.1) 50%, transparent 100%);
+    mix-blend-mode: overlay;
+    transition: transform 1.1s var(--transition-luxury);
 }
 
 .card:hover {
     transform: translateY(-8px);
-    border-color: #D4AF37;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
-    background: linear-gradient(135deg, #2A2A2A, #1A1A1A);
+    border-color: var(--hairline-gold-strong);
+    box-shadow:
+        var(--shadow-panel),
+        inset 0 0 36px -12px rgba(212, 175, 55, 0.35);
 }
 
+.card:hover::after {
+    transform: translateX(280%);
+}
+
+/* Gold frame corner — a lit film-frame bracket in the top-left of each panel. */
+.frameCorner {
+    position: absolute;
+    top: 14px;
+    left: 14px;
+    width: 22px;
+    height: 22px;
+    z-index: 1;
+    pointer-events: none;
+    border-top: 1px solid var(--hairline-gold-strong);
+    border-left: 1px solid var(--hairline-gold-strong);
+    opacity: 0.55;
+    transition: opacity 0.55s var(--transition-luxury);
+}
+
+.card:hover .frameCorner {
+    opacity: 1;
+}
+
+/* Keep card content above the sheen + frame layers */
+.icon,
+.cardTitle,
+.cardText,
+.link {
+    position: relative;
+    z-index: 1;
+}
+
+/* Calm gold icon ring */
 .icon {
     width: 64px;
     height: 64px;
-    margin: 0 auto 1.5rem;
+    margin: 0 auto var(--spacing-md);
     display: flex;
     align-items: center;
     justify-content: center;
-    background: rgba(212, 175, 55, 0.1);
-    border: 2px solid rgba(212, 175, 55, 0.3);
-    border-radius: 50%;
-    color: #D4AF37;
-    transition: all 0.3s ease;
+    background: rgba(212, 175, 55, 0.08);
+    border: 1px solid var(--hairline-gold-strong);
+    border-radius: var(--border-radius-full);
+    color: var(--color-gold-premium);
+    transition:
+        transform 0.55s var(--transition-luxury),
+        background 0.55s var(--transition-luxury),
+        box-shadow 0.55s var(--transition-luxury),
+        border-color 0.55s var(--transition-luxury);
 }
 
 .card:hover .icon {
-    background: rgba(212, 175, 55, 0.2);
-    border-color: #D4AF37;
-    transform: scale(1.1);
+    background: rgba(212, 175, 55, 0.16);
+    border-color: var(--hairline-gold-strong);
+    box-shadow: var(--glow-gold-soft);
+    transform: scale(1.06);
 }
 
 .cardTitle {
     font-family: var(--font-display);
-    font-size: 1.75rem;
+    font-size: var(--text-2xl);
     font-weight: 600;
-    color: #FFFFFF;
-    letter-spacing: 0.02em;
-    margin-bottom: 1rem;
+    color: var(--color-white);
+    letter-spacing: var(--tracking-tight);
+    text-transform: uppercase;
+    margin-bottom: var(--spacing-sm);
 }
 
 .cardText {
     font-family: var(--font-body);
-    font-size: 1rem;
+    font-size: var(--text-base);
     line-height: 1.6;
-    color: rgba(255, 255, 255, 0.8);
-    margin-bottom: 1rem;
+    color: var(--color-platinum);
+    max-width: var(--measure-narrow);
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: var(--spacing-sm);
+    opacity: 0.9;
 }
 
 .cardText strong {
-    color: #D4AF37;
+    color: var(--color-gold-premium);
     font-weight: 700;
 }
 
 .link {
     display: inline-block;
     font-family: var(--font-heading);
-    font-size: 1rem;
-    color: #D4AF37;
+    font-size: var(--text-base);
+    color: var(--color-gold-premium);
     text-decoration: none;
     font-style: italic;
-    letter-spacing: 0.02em;
-    margin-top: 0.5rem;
-    transition: all 0.3s ease;
+    letter-spacing: 0.01em;
+    margin-top: var(--spacing-xs);
+    transition:
+        color 0.4s var(--transition-luxury),
+        transform 0.4s var(--transition-luxury);
 }
 
 .link:hover {
-    color: #FFFFFF;
+    color: var(--color-white);
     transform: translateX(4px);
 }
 
 @media (max-width: 768px) {
     .section {
-        padding: 4rem 1.5rem;
+        padding: var(--spacing-2xl) var(--container-pad);
     }
 
     .grid {
         grid-template-columns: 1fr;
-        gap: 1.5rem;
+        gap: var(--spacing-md);
     }
 }
 
 @media (max-width: 480px) {
     .section {
-        padding: 3rem 1.25rem;
+        padding: var(--spacing-xl) var(--container-pad);
     }
 
     .card {
-        padding: 2rem 1.5rem;
+        padding: var(--spacing-xl) var(--spacing-lg);
+    }
+}
+
+/* REDUCED MOTION — hold the card sheen still; the heading glow + slate dot are
+   already static here (the global .slate-eyebrow has no animation, and the
+   global reduced-motion block calms .neon-title). */
+@media (prefers-reduced-motion: reduce) {
+    .card::after {
+        transition: none !important;
+        transform: none !important;
+        opacity: 0 !important;
     }
 
-    .title {
-        font-size: 2.2rem;
+    .card:hover::after {
+        transform: none !important;
     }
 
-    .cardTitle {
-        font-size: 1.5rem;
+    .frameCorner {
+        transition: none !important;
     }
 }

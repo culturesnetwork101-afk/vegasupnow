@@ -20,6 +20,7 @@ export default function RootLayout({
       <body className={inter.className}>
         <div className="global-vegas-background" />
         {children}
+        <div className="cinema-grain" aria-hidden="true" />
       </body>
     </html>
   );
