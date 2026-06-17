@@ -74,7 +74,16 @@ export default function NewsFeed() {
                     {news.slice(0, 6).map((item, index) => (
                         <motion.div
                             key={index}
+                            role="button"
+                            tabIndex={0}
+                            aria-label={`Read: ${item.title}`}
                             onClick={() => setSelectedItem(item)}
+                            onKeyDown={(e) => {
+                                if (e.key === 'Enter' || e.key === ' ') {
+                                    e.preventDefault();
+                                    setSelectedItem(item);
+                                }
+                            }}
                             className={styles.card}
                             {...reveal}
                             transition={{ ...reveal.transition, delay: index * 0.08 }}

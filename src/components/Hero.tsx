@@ -1,8 +1,9 @@
 'use client';
-import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
+import { motion, useScroll, useTransform, useReducedMotion, AnimatePresence } from 'framer-motion';
 import { useRef, useState, useEffect } from 'react';
 import { Calendar, Play, X, Radio } from 'lucide-react';
 import styles from './Hero.module.css';
+import { useFocusTrap } from '@/hooks/useFocusTrap';
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 
@@ -30,15 +31,17 @@ export default function Hero() {
     const containerRef = useRef(null);
     const [isVideoActive, setIsVideoActive] = useState(false);
     const [isLive, setIsLive] = useState(false);
+    const theaterRef = useFocusTrap<HTMLDivElement>(isVideoActive, () => setIsVideoActive(false));
 
     const { scrollYProgress } = useScroll({
         target: containerRef,
         offset: ["start start", "end start"]
     });
 
-    const y = useTransform(scrollYProgress, [0, 1], [0, 200]);
+    const prefersReduced = useReducedMotion();
+    const y = useTransform(scrollYProgress, [0, 1], prefersReduced ? [0, 0] : [0, 200]);
     const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
-    const scale = useTransform(scrollYProgress, [0, 1], [1, 1.05]);
+    const scale = useTransform(scrollYProgress, [0, 1], prefersReduced ? [1, 1] : [1, 1.05]);
 
     // Check live status
     useEffect(() => {
@@ -203,7 +206,15 @@ export default function Hero() {
             <AnimatePresence>
                 {isVideoActive && (
                     <motion.div
+                        ref={theaterRef}
                         className={styles.videoTheater}
+                        role="dialog"
+                        aria-modal="true"
+                        aria-label="Vegas Up Now video player"
+                        tabIndex={-1}
+                        onClick={(e) => {
+                            if (e.target === e.currentTarget) setIsVideoActive(false);
+                        }}
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
