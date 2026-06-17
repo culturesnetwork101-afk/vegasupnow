@@ -6,7 +6,7 @@ const DEFAULT_ITEMS = [
     'Hip-Hop',
     'R&B',
     'Pop',
-    'Risky talk',
+    'Risky radio',
     'Live from Las Vegas',
     'Saturdays 12PM PST',
     'Vegas Up Now',
