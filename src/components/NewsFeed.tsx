@@ -44,16 +44,6 @@ export default function NewsFeed() {
         fetchNews();
     }, []);
 
-    if (loading) {
-        return (
-            <section className={styles.section}>
-                <div className={styles.container}>
-                    <div className={styles.loading}>Loading latest news</div>
-                </div>
-            </section>
-        );
-    }
-
     return (
         <section id="news" className={styles.section}>
             <div className={styles.container}>
@@ -70,6 +60,17 @@ export default function NewsFeed() {
                     <p className={styles.subtitle}>The latest headlines from across the culture</p>
                 </motion.div>
 
+                {loading ? (
+                    <div className={styles.grid} aria-hidden="true">
+                        {Array.from({ length: 6 }).map((_, i) => (
+                            <div key={i} className={styles.skeletonCard} />
+                        ))}
+                    </div>
+                ) : news.length === 0 ? (
+                    <div className={styles.emptyState}>
+                        <p>Headlines are taking a break. Check back soon.</p>
+                    </div>
+                ) : (
                 <div className={styles.grid}>
                     {news.slice(0, 6).map((item, index) => (
                         <motion.div
@@ -111,6 +112,7 @@ export default function NewsFeed() {
                         </motion.div>
                     ))}
                 </div>
+                )}
             </div>
 
             <NewsModal
