@@ -1,41 +1,72 @@
-/* SOCIAL FEED SECTION */
+/* SOCIAL FEED SECTION — CINEMATIC BROADCAST HEADER
+   Opens like the hero's broadcast slate: the shared .slate-eyebrow tally kicker
+   sits over a gold .neon-title, then a lit gold rule and an italic lead.
+   Glow/breath utilities come from globals.css; no local keyframes redefined. */
 .section {
-    padding: 6rem 2rem;
+    padding: var(--space-section) var(--container-pad);
     background: transparent;
     text-align: center;
+    position: relative;
+    border-top: 1px solid var(--hairline-gold);
+}
+
+/* Faint gold glow bleeding down from the top hairline, like a studio key light
+   washing the top of the frame. Static, so it is reduced-motion safe. */
+.section::before {
+    content: '';
+    position: absolute;
+    inset: 0 0 auto 0;
+    height: 220px;
+    background: radial-gradient(ellipse 60% 100% at 50% 0%, rgba(212, 175, 55, 0.08) 0%, transparent 70%);
+    pointer-events: none;
 }
 
 .container {
-    max-width: 800px;
+    max-width: 760px;
     margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    z-index: 1;
 }
 
+/* Title sizing only — the gold gradient fill + halo come from .neon-title. */
 .title {
     font-family: var(--font-display);
-    font-size: clamp(2.5rem, 5vw, 4.5rem);
-    font-weight: 700;
-    color: #FFFFFF;
-    letter-spacing: -0.01em;
+    font-size: var(--text-3xl);
+    font-weight: 800;
+    letter-spacing: var(--tracking-tight);
+    text-transform: uppercase;
+    text-wrap: balance;
     margin-bottom: 1.5rem;
 }
 
+/* Lit gold rule with a soft broadcast glow, echoing the hero's gold waveform. */
 .divider {
-    width: 100px;
-    height: 3px;
-    background: linear-gradient(90deg, transparent, #D4AF37, transparent);
+    width: 90px;
+    height: 1px;
+    background: var(--divider-gold);
     margin: 0 auto 2rem;
+    box-shadow: 0 0 12px rgba(212, 175, 55, 0.4);
 }
 
 .subtitle {
     font-family: var(--font-heading);
-    font-size: 1.2rem;
-    color: rgba(255, 255, 255, 0.7);
+    font-size: var(--text-lg);
+    color: rgba(229, 231, 235, 0.62);
     font-style: italic;
-    line-height: 1.6;
+    line-height: 1.7;
+    max-width: var(--measure-narrow);
+    margin: 0 auto;
 }
 
 @media (max-width: 768px) {
     .section {
-        padding: 4rem 1.5rem;
+        padding: var(--spacing-xl) 1.5rem;
     }
 }
+
+/* The section's only motion is the inherited .neon-breathe-gold on the title,
+   which globals.css already holds static under reduced-motion. The static glow
+   wash and lit divider need no further reduced-motion handling. */

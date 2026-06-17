@@ -1,15 +1,41 @@
 'use client';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { motion } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
 import styles from './Navigation.module.css';
 
+const NAV_LINKS = [
+    { href: '#home', label: 'Home' },
+    { href: '#radio', label: 'Radio' },
+    { href: '#episodes', label: 'Episodes' },
+    { href: '#about', label: 'About' },
+    { href: '#schedule', label: 'Schedule' },
+    { href: '#socials', label: 'Socials' },
+    { href: '#media-kit', label: 'Media Kit' },
+    { href: '#news', label: 'News' },
+    { href: '#contact', label: 'Contact' },
+];
+
 export default function Navigation() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const [isScrolled, setIsScrolled] = useState(false);
+
+    useEffect(() => {
+        const onScroll = () => setIsScrolled(window.scrollY > 40);
+        onScroll();
+        window.addEventListener('scroll', onScroll, { passive: true });
+        return () => window.removeEventListener('scroll', onScroll);
+    }, []);
 
     return (
-        <nav className={styles.nav}>
+        <motion.nav
+            className={`${styles.nav} ${isScrolled ? styles.scrolled : ''}`}
+            initial={{ opacity: 0, y: -16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+        >
             <div className={styles.container}>
                 <Link href="/" className={styles.logoContainer}>
                     <Image
@@ -21,20 +47,24 @@ export default function Navigation() {
                     />
                     <div className={styles.logoText}>
                         <span className={styles.showName}>VEGAS UP NOW</span>
+                        <span className={styles.station}>
+                            <span className={styles.liveDot} aria-hidden="true">
+                                <span className={styles.liveDotPing} aria-hidden="true" />
+                            </span>
+                            <span className={styles.stationOnAir}>On air</span>
+                            <span className={styles.stationDivider} aria-hidden="true" />
+                            HOT 702.5 FM
+                        </span>
                     </div>
                 </Link>
 
                 {/* Desktop Navigation */}
                 <div className={styles.navLinks}>
-                    <Link href="#home" className={styles.navLink}>Home</Link>
-                    <Link href="#radio" className={styles.navLink}>Radio</Link>
-                    <Link href="#episodes" className={styles.navLink}>Episodes</Link>
-                    <Link href="#about" className={styles.navLink}>About</Link>
-                    <Link href="#schedule" className={styles.navLink}>Schedule</Link>
-                    <Link href="#socials" className={styles.navLink}>Socials</Link>
-                    <Link href="#media-kit" className={styles.navLink}>Media Kit</Link>
-                    <Link href="#news" className={styles.navLink}>News</Link>
-                    <Link href="#contact" className={styles.navLink}>Contact</Link>
+                    {NAV_LINKS.map((item) => (
+                        <Link key={item.href} href={item.href} className={styles.navLink}>
+                            {item.label}
+                        </Link>
+                    ))}
                 </div>
 
                 {/* Social Links */}
@@ -79,6 +109,7 @@ export default function Navigation() {
                     className={styles.menuButton}
                     onClick={() => setIsMenuOpen(!isMenuOpen)}
                     aria-label="Toggle menu"
+                    aria-expanded={isMenuOpen}
                 >
                     {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
                 </button>
@@ -87,36 +118,18 @@ export default function Navigation() {
             {/* Mobile Menu */}
             {isMenuOpen && (
                 <div className={styles.mobileMenu}>
-                    <Link href="#home" className={styles.mobileLink} onClick={() => setIsMenuOpen(false)}>
-                        Home
-                    </Link>
-                    <Link href="#radio" className={styles.mobileLink} onClick={() => setIsMenuOpen(false)}>
-                        Radio
-                    </Link>
-                    <Link href="#episodes" className={styles.mobileLink} onClick={() => setIsMenuOpen(false)}>
-                        Episodes
-                    </Link>
-                    <Link href="#about" className={styles.mobileLink} onClick={() => setIsMenuOpen(false)}>
-                        About
-                    </Link>
-                    <Link href="#schedule" className={styles.mobileLink} onClick={() => setIsMenuOpen(false)}>
-                        Schedule
-                    </Link>
-                    <Link href="#socials" className={styles.mobileLink} onClick={() => setIsMenuOpen(false)}>
-                        Socials
-                    </Link>
-                    <Link href="#media-kit" className={styles.mobileLink} onClick={() => setIsMenuOpen(false)}>
-                        Media Kit
-                    </Link>
-                    <Link href="#news" className={styles.mobileLink} onClick={() => setIsMenuOpen(false)}>
-                        News
-                    </Link>
-                    <Link href="#contact" className={styles.mobileLink} onClick={() => setIsMenuOpen(false)}>
-                        Contact
-                    </Link>
+                    {NAV_LINKS.map((item) => (
+                        <Link
+                            key={item.href}
+                            href={item.href}
+                            className={styles.mobileLink}
+                            onClick={() => setIsMenuOpen(false)}
+                        >
+                            {item.label}
+                        </Link>
+                    ))}
                 </div>
             )}
-        </nav>
+        </motion.nav>
     );
 }
-

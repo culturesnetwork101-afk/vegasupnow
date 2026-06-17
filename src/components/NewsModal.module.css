@@ -1,99 +1,176 @@
+/* ============================================
+   NEWS MODAL — obsidian glass article reader
+   ============================================ */
 .overlay {
     position: fixed;
     inset: 0;
-    background: rgba(0, 0, 0, 0.85);
-    backdrop-filter: blur(8px);
-    z-index: 2000;
+    background: rgba(2, 2, 4, 0.78);
+    backdrop-filter: blur(10px) saturate(120%);
+    -webkit-backdrop-filter: blur(10px) saturate(120%);
+    z-index: var(--z-modal);
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 2rem;
+    padding: var(--spacing-lg);
 }
 
+/* Heavier obsidian surface, gold hairline, deep panel shadow + faint gold halo.
+   The premium obsidian reader: a framed film still for a single dispatch. */
 .modal {
-    background: #121212;
+    background: var(--glass-panel-solid);
+    backdrop-filter: blur(22px) saturate(160%);
+    -webkit-backdrop-filter: blur(22px) saturate(160%);
     width: 100%;
     max-width: 800px;
     max-height: 90vh;
-    border-radius: 12px;
-    border: 1px solid rgba(212, 175, 55, 0.2);
-    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.8), 0 0 20px rgba(212, 175, 55, 0.1);
+    border-radius: var(--border-radius-lg);
+    border: 1px solid var(--hairline-gold);
+    box-shadow:
+        var(--shadow-panel),
+        0 0 60px -24px rgba(212, 175, 55, 0.4);
     position: relative;
     overflow-y: auto;
+    isolation: isolate;
     scrollbar-width: thin;
-    scrollbar-color: #D4AF37 #000;
+    scrollbar-color: rgba(212, 175, 55, 0.45) transparent;
+}
+
+/* Soft corner vignette inside the reader so it reads as a lit, framed plate. */
+.modal::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    border-radius: inherit;
+    pointer-events: none;
+    background: radial-gradient(ellipse 120% 60% at 50% 0%, rgba(212, 175, 55, 0.07) 0%, transparent 50%);
+}
+
+/* Gold hairline rail pinned to the reader's top edge — the broadcast tally bar. */
+.topAccent {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    z-index: var(--z-raised);
+    pointer-events: none;
+    border-top-left-radius: var(--border-radius-lg);
+    border-top-right-radius: var(--border-radius-lg);
+    background: linear-gradient(90deg, transparent 0%, var(--color-vegas-gold) 28%, #FDEFAE 50%, var(--color-vegas-gold) 72%, transparent 100%);
+    box-shadow: 0 0 14px rgba(212, 175, 55, 0.45);
 }
 
 .closeButton {
     position: absolute;
-    top: 1.5rem;
-    right: 1.5rem;
-    background: rgba(0, 0, 0, 0.5);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    color: white;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
+    top: var(--spacing-md);
+    right: var(--spacing-md);
+    background: rgba(8, 8, 11, 0.7);
+    border: 1px solid var(--hairline-gold);
+    color: var(--color-platinum);
+    width: 42px;
+    height: 42px;
+    border-radius: var(--border-radius-full);
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    transition: all 0.3s ease;
-    z-index: 10;
+    z-index: var(--z-raised);
+    transition:
+        background 0.45s var(--transition-luxury),
+        color 0.45s var(--transition-luxury),
+        border-color 0.45s var(--transition-luxury),
+        transform 0.45s var(--transition-luxury),
+        box-shadow 0.45s var(--transition-luxury);
 }
 
 .closeButton:hover {
-    background: #D4AF37;
-    color: black;
+    background: var(--color-gold-premium);
+    color: var(--color-black);
+    border-color: var(--color-gold-premium);
+    box-shadow: var(--glow-gold-soft);
     transform: rotate(90deg);
 }
 
 .content {
-    padding: 3rem;
+    position: relative;
+    z-index: 1;
+    padding: var(--spacing-2xl);
 }
 
+/* META ROW — source pill + dated stamp on a hairline */
 .meta {
     display: flex;
     align-items: center;
-    gap: 1.5rem;
-    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+    gap: var(--spacing-md);
+    padding-bottom: var(--spacing-md);
+    margin-bottom: var(--spacing-lg);
+    border-bottom: 1px solid var(--hairline-white);
 }
 
 .sourceBadge {
-    display: flex;
+    display: inline-flex;
     align-items: center;
     gap: 0.5rem;
-    color: #D4AF37;
-    font-family: var(--font-heading);
-    font-size: 0.9rem;
-    font-style: italic;
-    font-weight: 500;
+    background: rgba(212, 175, 55, 0.08);
+    color: var(--color-gold-premium);
+    padding: 0.3rem 0.85rem;
+    border: 1px solid var(--hairline-gold);
+    border-radius: var(--border-radius-full);
+    font-family: var(--font-body);
+    font-size: var(--text-xs);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+}
+
+/* Lit gold signal light, mirroring the hero ON AIR tally + the card stamp. */
+.sourceDot {
+    width: 6px;
+    height: 6px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    background: var(--color-vegas-gold);
+    box-shadow: 0 0 8px rgba(212, 175, 55, 0.7);
 }
 
 .date {
-    display: flex;
+    display: inline-flex;
     align-items: center;
     gap: 0.5rem;
-    color: rgba(255, 255, 255, 0.5);
-    font-size: 0.85rem;
+    color: rgba(229, 231, 235, 0.55);
+    font-family: var(--font-body);
+    font-size: var(--text-xs);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
 }
 
 .title {
     font-family: var(--font-display);
-    font-size: clamp(1.8rem, 4vw, 2.5rem);
-    color: white;
-    line-height: 1.2;
-    margin-bottom: 2rem;
-    letter-spacing: 0.01em;
+    font-size: var(--text-2xl);
+    font-weight: 700;
+    line-height: 1.15;
+    letter-spacing: var(--tracking-tight);
+    text-transform: uppercase;
+    text-wrap: balance;
+    margin-bottom: var(--spacing-lg);
+    /* Gold neon signage, matching the section headline + hero wordmark. */
+    background: linear-gradient(135deg, #FDEFAE 4%, #E6C766 30%, #D4AF37 58%, #C8341F 96%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0 0 18px rgba(212, 175, 55, 0.26));
 }
 
 .imageWrapper {
     width: 100%;
     aspect-ratio: 16 / 9;
-    margin-bottom: 2rem;
-    border-radius: 8px;
+    margin-bottom: var(--spacing-lg);
+    border-radius: var(--border-radius);
     overflow: hidden;
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border: 1px solid var(--hairline-white);
 }
 
 .image {
@@ -104,48 +181,61 @@
 
 .articleBody {
     font-family: var(--font-body);
-    font-size: 1.1rem;
+    font-size: var(--text-base);
     line-height: 1.8;
-    color: rgba(255, 255, 255, 0.85);
-    margin-bottom: 3rem;
+    color: rgba(255, 255, 255, 0.82);
+    margin-bottom: var(--spacing-2xl);
 }
 
 .articleBody p {
-    margin-bottom: 1.5rem;
+    margin-bottom: var(--spacing-md);
+    max-width: var(--measure);
 }
 
+/* FOOTER — gold hairline divider, centered prompt + read-more action */
 .footer {
-    padding-top: 2rem;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: var(--spacing-lg);
+    border-top: 1px solid var(--hairline-gold);
     text-align: center;
 }
 
 .footerText {
-    color: rgba(255, 255, 255, 0.5);
+    color: rgba(229, 231, 235, 0.55);
+    font-family: var(--font-heading);
     font-style: italic;
-    margin-bottom: 1.5rem;
+    font-size: var(--text-base);
+    margin: 0 auto var(--spacing-md);
+    max-width: var(--measure-narrow);
 }
 
+/* READ MORE — outlined gold action that fills on hover (btn-secondary recipe) */
 .readMoreBtn {
     display: inline-flex;
     align-items: center;
-    gap: 0.75rem;
-    background: #D4AF37;
-    color: black;
-    padding: 1rem 2rem;
-    border-radius: 4px;
-    font-family: var(--font-heading);
-    font-weight: 700;
+    gap: 0.6rem;
+    background: transparent;
+    color: var(--color-gold-premium);
+    padding: 0.85rem 1.9rem;
+    border: 1px solid var(--color-vegas-gold);
+    border-radius: var(--border-radius);
+    font-family: var(--font-body);
+    font-size: var(--text-sm);
+    font-weight: 600;
     text-decoration: none;
     text-transform: uppercase;
-    letter-spacing: 0.05em;
-    transition: all 0.3s ease;
+    letter-spacing: var(--tracking-wide);
+    transition:
+        background 0.45s var(--transition-luxury),
+        color 0.45s var(--transition-luxury),
+        box-shadow 0.45s var(--transition-luxury),
+        transform 0.45s var(--transition-luxury);
 }
 
 .readMoreBtn:hover {
-    background: white;
+    background: var(--color-vegas-gold);
+    color: var(--color-black);
+    box-shadow: var(--shadow-glow-gold);
     transform: translateY(-2px);
-    box-shadow: 0 10px 20px rgba(212, 175, 55, 0.3);
 }
 
 @media (max-width: 768px) {
@@ -160,6 +250,6 @@
     }
 
     .content {
-        padding: 4rem 1.5rem 2rem;
+        padding: var(--spacing-3xl) var(--spacing-lg) var(--spacing-lg);
     }
 }

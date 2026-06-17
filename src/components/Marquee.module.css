@@ -1,0 +1,90 @@
+/* ========================================
+   MARQUEE — BROADCAST TICKER DIVIDER
+   A thin, full-width scrolling ticker that echoes the hero's bottom marquee:
+   hairline gold top/bottom borders, a blurred translucent obsidian bar, uppercase
+   Inter with wide tracking, gold diamond separators. Seamless loop via a duplicated
+   group + translateX -50%. Decorative; scroll holds static under reduced motion.
+   ======================================== */
+
+@keyframes marqueeScroll {
+    0%   { transform: translate3d(0, 0, 0); }
+    100% { transform: translate3d(-50%, 0, 0); }
+}
+
+.marquee {
+    position: relative;
+    width: 100%;
+    height: 3rem;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    border-top: 1px solid var(--hairline-gold);
+    border-bottom: 1px solid var(--hairline-gold);
+    background: linear-gradient(180deg, rgba(8, 8, 10, 0.55) 0%, rgba(8, 8, 10, 0.78) 100%);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+}
+
+.track {
+    display: flex;
+    width: max-content;
+    animation: marqueeScroll 38s linear infinite;
+    will-change: transform;
+}
+
+.group {
+    display: flex;
+    flex-shrink: 0;
+}
+
+.item {
+    display: inline-flex;
+    align-items: center;
+    font-family: var(--font-body);
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: rgba(229, 231, 235, 0.62);
+    white-space: nowrap;
+}
+
+.dot {
+    margin: 0 1.6rem;
+    font-size: 0.55rem;
+    opacity: 0.85;
+    text-shadow: var(--glow-gold-soft);
+}
+
+/* TONES — accent color for the diamond separators + hairline borders. */
+.toneGold {
+    border-top-color: var(--hairline-gold);
+    border-bottom-color: var(--hairline-gold);
+}
+
+.toneGold .dot {
+    color: var(--color-vegas-gold);
+}
+
+.toneRed {
+    border-top-color: rgba(220, 38, 38, 0.3);
+    border-bottom-color: rgba(220, 38, 38, 0.3);
+}
+
+.toneRed .dot {
+    color: var(--color-hot-red);
+    text-shadow: var(--glow-red-soft);
+}
+
+@media (max-width: 480px) {
+    .marquee { height: 2.6rem; }
+    .item { font-size: 0.66rem; }
+    .dot { margin: 0 1.1rem; }
+}
+
+/* REDUCED MOTION — hold the ticker static, no scroll. */
+@media (prefers-reduced-motion: reduce) {
+    .track {
+        animation: none !important;
+    }
+}

@@ -1,6 +1,6 @@
 'use client';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, ExternalLink, Calendar, Newspaper } from 'lucide-react';
+import { X, ExternalLink, Calendar, Radio } from 'lucide-react';
 import styles from './NewsModal.module.css';
 
 interface NewsItem {
@@ -35,10 +35,13 @@ export default function NewsModal({ item, onClose }: NewsModalProps) {
                         <X size={24} />
                     </button>
 
+                    <span className={styles.topAccent} aria-hidden="true" />
+
                     <div className={styles.content}>
                         <div className={styles.meta}>
                             <div className={styles.sourceBadge}>
-                                <Newspaper size={14} />
+                                <span className={styles.sourceDot} aria-hidden="true" />
+                                <Radio size={14} />
                                 <span>{item.source}</span>
                             </div>
                             <div className={styles.date}>
