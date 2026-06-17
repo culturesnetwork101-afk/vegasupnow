@@ -2,7 +2,7 @@
 export const SOCIAL = {
   // YouTube: the channel URL is provably correct (the channel the site embeds).
   youtube: 'https://www.youtube.com/channel/UC_oVuCQmHJkAKhYOqmMgXmQ',
-  facebook: 'https://www.facebook.com/hot7025fm',
+  facebook: 'https://www.facebook.com/share/1MGgtunuZg/', // Bonafied Culture (the host's page)
   instagram: 'https://www.instagram.com/vegasupnowradio',
   tiktok: 'https://www.tiktok.com/@hot7025fm',
 } as const;
