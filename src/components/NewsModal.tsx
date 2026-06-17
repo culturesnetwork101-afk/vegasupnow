@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { X, ExternalLink, Calendar, Radio } from 'lucide-react';
 import styles from './NewsModal.module.css';
 import DOMPurify from 'isomorphic-dompurify';
+import { useFocusTrap } from '@/hooks/useFocusTrap';
 
 interface NewsItem {
     title: string;
@@ -20,13 +21,20 @@ interface NewsModalProps {
 }
 
 export default function NewsModal({ item, onClose }: NewsModalProps) {
+    const modalRef = useFocusTrap<HTMLDivElement>(!!item, onClose);
+
     if (!item) return null;
 
     return (
         <AnimatePresence>
             <div className={styles.overlay} onClick={onClose}>
                 <motion.div
+                    ref={modalRef}
                     className={styles.modal}
+                    role="dialog"
+                    aria-modal="true"
+                    aria-labelledby="news-modal-title"
+                    tabIndex={-1}
                     initial={{ opacity: 0, scale: 0.9, y: 20 }}
                     animate={{ opacity: 1, scale: 1, y: 0 }}
                     exit={{ opacity: 0, scale: 0.9, y: 20 }}
@@ -51,7 +59,7 @@ export default function NewsModal({ item, onClose }: NewsModalProps) {
                             </div>
                         </div>
 
-                        <h2 className={styles.title}>{item.title}</h2>
+                        <h2 id="news-modal-title" className={styles.title}>{item.title}</h2>
 
                         {item.image && (
                             <div className={styles.imageWrapper}>
