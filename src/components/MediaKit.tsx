@@ -170,17 +170,23 @@ export default function MediaKit() {
                     </div>
                 </motion.div>
 
-                {/* 6. Contact */}
+                {/* 6. Advertise with us (sponsor-specific direct line) */}
                 <motion.div {...reveal} className={styles.contactFooter}>
                     <div className={styles.cardHeading}>
                         <Mic className={styles.cardHeadingIcon} size={22} aria-hidden="true" />
-                        <h3 className={styles.sectionHeading}>Contact</h3>
+                        <h3 className={styles.sectionHeading}>Ready to advertise?</h3>
                     </div>
+                    <p className={styles.contactLead}>
+                        Email Terry directly to talk sponsorship and pricing.
+                    </p>
                     <div className={styles.contactGrid}>
                         <div className={styles.contactItem}>
                             <span className={styles.contactName}>Terry &quot;Bonafied100&quot; Walston</span>
                         </div>
-                        <a href="mailto:culturesnetwork101@gmail.com" className={styles.contactLink}>
+                        <a
+                            href="mailto:culturesnetwork101@gmail.com?subject=Advertising%20with%20Vegas%20Up%20Now"
+                            className={styles.contactLink}
+                        >
                             <Mail size={20} aria-hidden="true" /> culturesnetwork101@gmail.com
                         </a>
                         <a href={SOCIAL.instagram} target="_blank" rel="noopener noreferrer" className={styles.contactLink}>

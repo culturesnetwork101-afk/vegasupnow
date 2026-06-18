@@ -67,7 +67,7 @@
 
 .grid {
     display: grid;
-    grid-template-columns: 1.4fr 1fr 1fr;
+    grid-template-columns: 1.6fr 1fr;
     gap: var(--spacing-2xl);
     margin-bottom: var(--spacing-2xl);
     align-items: start;
@@ -143,16 +143,14 @@
     flex-shrink: 0;
 }
 
-.linksSection,
-.contactSection {
+.linksSection {
     display: flex;
     flex-direction: column;
     gap: var(--spacing-md);
 }
 
 /* Broadcast-slate header sits a touch tighter to its column body. */
-.linksSection :global(.slate-eyebrow),
-.contactSection :global(.slate-eyebrow) {
+.linksSection :global(.slate-eyebrow) {
     margin-bottom: 0.25rem;
 }
 
@@ -176,35 +174,6 @@
 .linksList a:hover {
     color: var(--color-vegas-gold);
     transform: translateX(4px);
-    opacity: 1;
-}
-
-.contactList {
-    display: flex;
-    flex-direction: column;
-    gap: var(--spacing-sm);
-}
-
-.contactItem {
-    display: flex;
-    align-items: center;
-    gap: 0.7rem;
-    font-family: var(--font-body);
-    font-size: var(--text-sm);
-    color: var(--color-platinum);
-    text-decoration: none;
-    transition: color var(--transition-fast);
-    opacity: 0.85;
-}
-
-.contactItem svg {
-    color: var(--color-gold-premium);
-    flex-shrink: 0;
-    transition: color var(--transition-fast);
-}
-
-.contactItem:hover {
-    color: var(--color-vegas-gold);
     opacity: 1;
 }
 
@@ -293,8 +262,7 @@
         max-width: none;
     }
 
-    .linksSection,
-    .contactSection {
+    .linksSection {
         align-items: center;
     }
 

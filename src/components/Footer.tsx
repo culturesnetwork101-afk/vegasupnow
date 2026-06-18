@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 import { motion } from 'framer-motion';
-import { Radio, Mail } from 'lucide-react';
+import { Radio } from 'lucide-react';
 import styles from './Footer.module.css';
 
 const revealContainer = {
@@ -60,22 +60,9 @@ export default function Footer() {
                         <ul className={styles.linksList}>
                             <li><a href="#about">About</a></li>
                             <li><a href="#schedule">Schedule</a></li>
+                            <li><a href="#media-kit">Advertise</a></li>
                             <li><a href="#contact">Contact</a></li>
                         </ul>
-                    </motion.div>
-
-                    {/* Contact Info */}
-                    <motion.div className={styles.contactSection} variants={revealItem}>
-                        <span className="slate-eyebrow">
-                            <span className="slate-dot" />
-                            Contact
-                        </span>
-                        <div className={styles.contactList}>
-                            <a href="mailto:culturesnetwork101@gmail.com" className={styles.contactItem}>
-                                <Mail size={16} />
-                                <span>culturesnetwork101@gmail.com</span>
-                            </a>
-                        </div>
                     </motion.div>
                 </motion.div>
 
